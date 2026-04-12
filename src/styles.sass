@@ -1,0 +1,194 @@
+\:root
+  color-scheme: dark
+  --color: var(--color-gray)
+
+html, body
+  font-size: 16px
+  font-family: Rubik, sans-serif
+  font-weight: 300
+  font-variant-numeric: tabular-nums
+  text-rendering: optimizeLegibility
+  margin: 0
+  padding: 0
+  width: 100%
+  height: 100%
+  overflow: hidden
+  display: flex
+  flex-direction: column
+  fill: white
+  color: var(--color-bright)
+  background-color: var(--color-background)
+  touch-action: pan-x pan-y
+
+*, *::before, *::after
+  box-sizing: border-box
+  user-select: none
+  -webkit-user-select: none
+
+h1, h2, h3, h4, h5
+  margin: 0
+  font-weight: inherit
+
+p
+  line-height: 1.5em
+
+a
+  font: inherit
+  color: var(--color-blue)
+  cursor: pointer
+  outline: none
+  text-decoration: none
+
+  &.active
+    color: var(--color-yellow)
+
+.hidden
+  display: none !important
+
+.app
+  flex: 1 1 auto
+  display: flex
+  flex-direction: column
+  min-height: 0
+
+.slide
+  flex: 1 1 auto
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: stretch
+  padding: 6vmin 8vmin
+  min-height: 0
+  background-color: var(--color-panel-background)
+  background-image: linear-gradient(45deg, var(--color-panel-background-dark) 25%, var(--color-panel-background) 25%, var(--color-panel-background) 50%, var(--color-panel-background-dark) 50%, var(--color-panel-background-dark) 75%, var(--color-panel-background) 75%, var(--color-panel-background) 100%)
+  background-size: 5.66px 5.66px
+  background-attachment: fixed
+
+  > header
+    display: flex
+    flex-direction: column
+    gap: 0.4em
+    margin-bottom: 4vmin
+
+    .eyebrow
+      font-size: 1rem
+      letter-spacing: 0.3em
+      text-transform: uppercase
+      color: var(--color-green)
+
+    h1
+      font-size: clamp(2.5rem, 7vmin, 6rem)
+      font-weight: 700
+      line-height: 1.05
+      color: var(--color-bright)
+
+  > .content
+    flex: 1 1 auto
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    gap: 1.5rem
+    font-size: clamp(1.1rem, 2.4vmin, 1.75rem)
+    color: var(--color-gray)
+    min-height: 0
+    overflow: auto
+
+    strong
+      color: var(--color-cream)
+      font-weight: 400
+      padding: 0
+
+    code
+      font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace
+      font-size: 0.85em
+      background-color: var(--color-panel-background-dark)
+      color: var(--color-orange)
+      padding: 0.1em 0.1em 0.1em 0.2em
+      border-radius: 0.25em
+
+.nav
+  flex: 0 0 auto
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 1rem 2rem
+  background-color: var(--color-panel-background-dark)
+  border-top: 1px solid var(--color-shadow)
+  font-size: 0.875rem
+  color: var(--color-gray)
+
+  .brand
+    display: flex
+    align-items: center
+    gap: 0.6rem
+    color: var(--color-bright)
+
+    .dot
+      width: 0.55rem
+      height: 0.55rem
+      border-radius: 50%
+      background-color: var(--color-green)
+      box-shadow: 0 0 0.6rem var(--color-green)
+
+  .pages
+    display: flex
+    gap: 1.5rem
+
+    a
+      color: var(--color-gray)
+
+      &.active
+        color: var(--color-yellow)
+
+  .step
+    display: flex
+    align-items: center
+    gap: 1rem
+    color: var(--color-shadow)
+
+    span.counter
+      color: var(--color-cream)
+      font-variant-numeric: tabular-nums
+
+.bullets
+  display: flex
+  flex-direction: column
+  gap: 0.9rem
+  margin: 0
+  padding: 0
+  list-style: none
+
+  li
+    position: relative
+    padding-left: 1.6em
+
+    &::before
+      content: "▸"
+      color: var(--color-orange)
+      font-size: 0.9em
+      position: absolute
+      left: 0
+      top: 0
+
+.demo-grid
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  gap: 1rem
+  margin-top: 1rem
+
+  .pad
+    aspect-ratio: 1
+    border-radius: 0.5rem
+    background-color: var(--color-panel-background-dark)
+    border: 1px solid var(--color-shadow)
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: 0.9rem
+    color: var(--color-gray)
+    transition: background-color 0.15s ease, color 0.15s ease
+
+    &.lit
+      background-color: var(--color-green)
+      color: var(--color-black)
+      border-color: var(--color-green)
