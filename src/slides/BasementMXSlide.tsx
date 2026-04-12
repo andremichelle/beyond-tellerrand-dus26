@@ -47,7 +47,7 @@ export const BasementMXSlide = () => {
     const showGuide = () => replaceChildren(flashHost, <Guide/>)
     showBank("techno")
     return (
-        <Slide eyebrow="Time machine · 2001" headline="basementmx — Flash turntables, in 2026.">
+        <Slide eyebrow="Time machine · 2001" headline="Basementmx — Flash turntables.">
             <div className="basementmx">
                 <div className="stage">
                     <div className="top">
