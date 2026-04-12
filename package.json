@@ -9,10 +9,6 @@
     "preview": "vite preview --host"
   },
   "dependencies": {
-    "@opendaw/lib-dom": "^0.0.79",
-    "@opendaw/lib-jsx": "^0.0.79",
-    "@opendaw/lib-std": "^0.0.74",
-    "@opendaw/studio-enums": "^0.0.70",
     "@opendaw/studio-sdk": "^0.0.132"
   },
   "devDependencies": {
