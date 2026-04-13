@@ -9,7 +9,8 @@ export const IntroSlide = () => (
     <Slide eyebrow="beyond tellerrand · DUS26" headline="Why You Should Do It Anyway!">
         <div className={className}>
             <h1>André Michelle</h1>
-            <h2>andre.michelle@opendaw.org</h2>
+            <h2>Web developer since 1998</h2>
+            <h3>andre.michelle@opendaw.org</h3>
             <p>Founder of openDAW, a new holistic exploration of music creation inside your browser.</p>
         </div>
     </Slide>

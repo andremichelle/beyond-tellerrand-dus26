@@ -11,7 +11,14 @@
     <title>BEYOND TELLERAND DUS26</title>
     <script>
         window.RufflePlayer = window.RufflePlayer || {}
-        window.RufflePlayer.config = {autoplay: "on", unmuteOverlay: "hidden", splashScreen: false}
+        window.RufflePlayer.config = {
+            autoplay: "on",
+            unmuteOverlay: "hidden",
+            splashScreen: false,
+            frameRate: 60,
+            maxExecutionDuration: 600,
+            quality: "medium"
+        }
     </script>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <script type="module" src="/src/main.ts"></script>

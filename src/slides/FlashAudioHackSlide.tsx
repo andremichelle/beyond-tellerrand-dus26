@@ -21,15 +21,15 @@ const Step = ({x, y, w, h, title, sub, variant}: StepProps) => {
     const boxClass = `box${variant ? ` ${variant}` : ""}`
     return (
         <Frag>
-            <rect x={x} y={y} width={w} height={h} rx={12} ry={12} className={boxClass}/>
-            <text x={String(cx)} y={String(cy - 6)} className="box-label" text-anchor="middle">{title}</text>
-            <text x={String(cx)} y={String(cy + 28)} className="box-sub" text-anchor="middle">{sub}</text>
+            <rect x={x} y={y} width={w} height={h} rx={12} ry={12} class={boxClass}/>
+            <text x={String(cx)} y={String(cy - 6)} class="box-label" text-anchor="middle">{title}</text>
+            <text x={String(cx)} y={String(cy + 28)} class="box-sub" text-anchor="middle">{sub}</text>
         </Frag>
     )
 }
 
 const Arrow = ({x1, y1, x2, y2}: { x1: number, y1: number, x2: number, y2: number }) => (
-    <line x1={x1} y1={y1} x2={x2} y2={y2} className="arrow" marker-end="url(#arrow-head)"/>
+    <line x1={x1} y1={y1} x2={x2} y2={y2} class="arrow" marker-end="url(#arrow-head)"/>
 )
 
 export const FlashAudioHackSlide = () => {
@@ -51,7 +51,7 @@ export const FlashAudioHackSlide = () => {
                     <li>Effects like eq, delay, reverb</li>
                     <li>Generative and algorithmic music</li>
                 </ul>
-                <svg className="diagram" viewBox="0 0 1720 560" preserveAspectRatio="xMidYMid meet">
+                <svg class="diagram" viewBox="0 0 1720 560" preserveAspectRatio="xMidYMid meet">
                     <defs>
                         <marker id="arrow-head" viewBox="0 0 10 10" refX="9" refY="5"
                                 markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -76,11 +76,11 @@ export const FlashAudioHackSlide = () => {
                         />
                     ))}
                     <path
-                        className="loop"
+                        class="loop"
                         d={`M ${xs[4] + w / 2} ${y + h + 10} V 430 H ${xs[0] + w / 2} V ${y + h + 10}`}
                         marker-end="url(#loop-head)"
                     />
-                    <text x={String((xs[0] + xs[4] + w) / 2)} y="460" text-anchor="middle" className="loop-label">
+                    <text x={String((xs[0] + xs[4] + w) / 2)} y="460" text-anchor="middle" class="loop-label">
                         Event.SOUND_COMPLETE → next chunk
                     </text>
                 </svg>
