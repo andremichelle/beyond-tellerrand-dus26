@@ -12,6 +12,7 @@ export const OpenDAWIdeasSlide = () => (
         <div class={className}>
             <img class="shot" src={SHOT} alt="openDAW"/>
             <ul class="bullets">
+                <li>Everybody should be able to make music for free.</li>
                 <li>Open-source. If everybody owns it, nobody can steal it.</li>
                 <li>Merge education and fun.</li>
                 <li>Data privacy is a priority.</li>
