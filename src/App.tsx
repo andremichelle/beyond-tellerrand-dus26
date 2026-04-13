@@ -1,7 +1,7 @@
 import {Terminator} from "@opendaw/lib-std"
 import {createElement, Frag, LocalLink, RouteLocation, Router} from "@opendaw/lib-jsx"
 import {SLIDES} from "@/index"
-import {runKeyIntercept} from "@/keyIntercept"
+import {runKeyIntercept, setPendingNavDirection} from "@/keyIntercept"
 
 export const App = () => {
     const terminator = new Terminator()
@@ -17,6 +17,7 @@ export const App = () => {
         const next = (current + delta + SLIDES.length) % SLIDES.length
         if (next !== current) {
             event.preventDefault()
+            setPendingNavDirection(delta > 0 ? "forward" : "backward")
             location.navigateTo(SLIDES[next].path)
         }
     }

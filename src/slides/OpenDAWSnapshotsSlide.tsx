@@ -2,7 +2,7 @@ import css from "./OpenDAWSnapshotsSlide.sass?inline"
 import {createElement} from "@opendaw/lib-jsx"
 import {Html} from "@opendaw/lib-dom"
 import {Slide} from "@/Slide"
-import {setKeyIntercept} from "@/keyIntercept"
+import {consumePendingNavDirection, setKeyIntercept} from "@/keyIntercept"
 
 const className = Html.adoptStyleSheet(css, "OpenDAWSnapshots")
 
@@ -39,9 +39,10 @@ const dateOf = (file: string): string => file.slice(0, 10)
 const srcOf = (file: string): string => `/opendaw/snapshots/${file}`
 
 export const OpenDAWSnapshotsSlide = () => {
-    let currentIndex = 0
-    const img = <img src={srcOf(SNAPSHOTS[0])} alt={dateOf(SNAPSHOTS[0])}/> as HTMLImageElement
-    const meta = <span>{dateOf(SNAPSHOTS[0])}</span> as HTMLSpanElement
+    const startIndex = consumePendingNavDirection() === "backward" ? SNAPSHOTS.length - 1 : 0
+    let currentIndex = startIndex
+    const img = <img src={srcOf(SNAPSHOTS[startIndex])} alt={dateOf(SNAPSHOTS[startIndex])}/> as HTMLImageElement
+    const meta = <span>{dateOf(SNAPSHOTS[startIndex])}</span> as HTMLSpanElement
     const dots: Array<HTMLButtonElement> = []
     const show = (index: number) => {
         currentIndex = index
@@ -55,7 +56,7 @@ export const OpenDAWSnapshotsSlide = () => {
         dots.push(
             <button
                 type="button"
-                class={index === 0 ? "active" : undefined}
+                class={index === startIndex ? "active" : undefined}
                 title={dateOf(file)}
                 onclick={() => show(index)}/> as HTMLButtonElement
         )
