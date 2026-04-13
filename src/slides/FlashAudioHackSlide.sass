@@ -1,0 +1,75 @@
+component
+  flex: 1 1 auto
+  display: flex
+  flex-direction: column
+  gap: 1.5rem
+  min-height: 0
+  overflow: hidden
+
+  ul.bullets
+    margin: 0
+    padding: 0
+    list-style: none
+    display: flex
+    flex-direction: column
+    gap: 0.5rem
+
+    li
+      position: relative
+      padding-left: 1.6em
+
+      &::before
+        content: "▸"
+        color: var(--color-orange)
+        position: absolute
+        left: 0
+        top: 0
+
+  .diagram
+    flex: 1 1 auto
+    width: 100%
+    min-height: 0
+
+    .box
+      fill: var(--color-panel-background-dark)
+      stroke: var(--color-shadow)
+      stroke-width: 2
+
+    .box.accent
+      stroke: var(--color-orange)
+
+    .box.terminal
+      stroke: var(--color-green)
+
+    .box-label
+      fill: var(--color-bright)
+      font-family: Rubik, sans-serif
+      font-size: 28px
+      font-weight: 400
+
+    .box-sub
+      fill: var(--color-gray)
+      font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace
+      font-size: 22px
+
+    .arrow
+      fill: none
+      stroke: var(--color-gray)
+      stroke-width: 3
+      stroke-linecap: round
+
+    .loop
+      fill: none
+      stroke: var(--color-orange)
+      stroke-width: 3
+      stroke-dasharray: 8 6
+      stroke-linecap: round
+
+    .loop-label
+      fill: var(--color-orange)
+      font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace
+      font-size: 24px
+
+  .note
+    color: var(--color-cream)
+    font-style: italic

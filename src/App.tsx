@@ -1,6 +1,6 @@
 import {Terminator} from "@opendaw/lib-std"
 import {createElement, Frag, LocalLink, RouteLocation, Router} from "@opendaw/lib-jsx"
-import {SLIDES} from "@/slides"
+import {SLIDES} from "@/index"
 
 export const App = () => {
     const terminator = new Terminator()
@@ -53,9 +53,9 @@ export const App = () => {
                         title="Toggle fullscreen"
                         onclick={() => {
                             if (document.fullscreenElement) {
-                                document.exitFullscreen()
+                                document.exitFullscreen().finally()
                             } else {
-                                document.documentElement.requestFullscreen()
+                                document.documentElement.requestFullscreen().finally()
                             }
                         }}>⛶
                     </button>

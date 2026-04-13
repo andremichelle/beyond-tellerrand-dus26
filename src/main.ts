@@ -2,9 +2,12 @@ import "./styles.sass"
 import {initializeColors} from "@opendaw/studio-enums"
 import {OPENDAW_SDK_VERSION} from "@opendaw/studio-sdk"
 import {App} from "@/App"
+import {loadFonts} from "@/Fonts"
 
 initializeColors(document.documentElement)
 console.debug(`openDAW SDK ${OPENDAW_SDK_VERSION}`)
+
+await loadFonts()
 
 const stage = document.createElement("div")
 stage.className = "stage-1080"

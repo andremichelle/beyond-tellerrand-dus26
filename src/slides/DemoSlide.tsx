@@ -3,7 +3,7 @@ import {createElement} from "@opendaw/lib-jsx"
 import {PageContext} from "@opendaw/lib-jsx"
 import {Html} from "@opendaw/lib-dom"
 import {Slide} from "@/Slide"
-import {SlideService} from "@/slides"
+import {SlideService} from "@/index"
 
 const className = Html.adoptStyleSheet(css, "Demo")
 
@@ -24,8 +24,8 @@ export const DemoSlide = ({lifecycle}: PageContext<SlideService>) => {
             <div className={className}>
                 <p>
                     Each cell below is a regular <code>&lt;div&gt;</code>. The lit pad walks through
-                    the grid using the <strong>page lifecycle</strong> from openDAW's tiny JSX router —
-                    navigate away and the timer is cleaned up automatically.
+                    the grid using the <strong>page lifecycle</strong> from openDAW's tiny JSX router.
+                    Navigate away and the timer is cleaned up automatically.
                 </p>
                 <div className="grid">
                     {pads}
