@@ -16,7 +16,7 @@ import {AudiotoolEscalationSlide} from "@/slides/AudiotoolEscalationSlide"
 import {StepBackSlide} from "@/slides/StepBackSlide"
 import {OpenDAWIdeasSlide} from "@/slides/OpenDAWIdeasSlide"
 import {OpenDAWAmbassadorsSlide} from "@/slides/OpenDAWAmbassadorsSlide"
-import {OpenDAWSnapshots} from "@/slides/OpenDAWSnapshots"
+import {OpenDAWSnapshotsSlide} from "@/slides/OpenDAWSnapshotsSlide"
 import {OpenDAWTodaySlide} from "@/slides/OpenDAWTodaySlide"
 
 export type SlideService = void
@@ -45,6 +45,6 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/step-back", title: "Step Back", factory: StepBackSlide},
     {path: "/opendaw-ideas", title: "openDAW Ideas", factory: OpenDAWIdeasSlide},
     {path: "/opendaw-ambassadors", title: "openDAW Ambassadors", factory: OpenDAWAmbassadorsSlide},
-    {path: "/opendaw-snapshots", title: "openDAW Snapshots", factory: OpenDAWSnapshots},
+    {path: "/opendaw-snapshots", title: "openDAW Snapshots", factory: OpenDAWSnapshotsSlide},
     {path: "/opendaw-today", title: "openDAW Today", factory: OpenDAWTodaySlide}
 ]

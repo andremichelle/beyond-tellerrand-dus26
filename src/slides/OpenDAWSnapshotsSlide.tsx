@@ -1,4 +1,4 @@
-import css from "./OpenDAWSnapshots.sass?inline"
+import css from "./OpenDAWSnapshotsSlide.sass?inline"
 import {createElement} from "@opendaw/lib-jsx"
 import {Html} from "@opendaw/lib-dom"
 import {Slide} from "@/Slide"
@@ -38,7 +38,7 @@ const SNAPSHOTS: ReadonlyArray<string> = [
 const dateOf = (file: string): string => file.slice(0, 10)
 const srcOf = (file: string): string => `/opendaw/snapshots/${file}`
 
-export const OpenDAWSnapshots = () => {
+export const OpenDAWSnapshotsSlide = () => {
     let currentIndex = 0
     const img = <img src={srcOf(SNAPSHOTS[0])} alt={dateOf(SNAPSHOTS[0])}/> as HTMLImageElement
     const meta = <span>{dateOf(SNAPSHOTS[0])}</span> as HTMLSpanElement
@@ -66,11 +66,20 @@ export const OpenDAWSnapshots = () => {
                 setKeyIntercept(null)
                 return false
             }
-            if (event.key !== "ArrowRight") {return false}
-            if (currentIndex >= SNAPSHOTS.length - 1) {return false}
-            event.preventDefault()
-            show(currentIndex + 1)
-            return true
+            if (event.shiftKey) {return false}
+            if (event.key === "ArrowRight") {
+                if (currentIndex >= SNAPSHOTS.length - 1) {return false}
+                event.preventDefault()
+                show(currentIndex + 1)
+                return true
+            }
+            if (event.key === "ArrowLeft") {
+                if (currentIndex <= 0) {return false}
+                event.preventDefault()
+                show(currentIndex - 1)
+                return true
+            }
+            return false
         })
     }
     return (
