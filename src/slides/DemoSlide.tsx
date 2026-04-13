@@ -1,7 +1,11 @@
+import css from "./DemoSlide.sass?inline"
 import {createElement} from "@opendaw/lib-jsx"
 import {PageContext} from "@opendaw/lib-jsx"
+import {Html} from "@opendaw/lib-dom"
 import {Slide} from "@/Slide"
 import {SlideService} from "@/slides"
+
+const className = Html.adoptStyleSheet(css, "Demo")
 
 export const DemoSlide = ({lifecycle}: PageContext<SlideService>) => {
     const pads: Array<HTMLDivElement> = []
@@ -17,13 +21,15 @@ export const DemoSlide = ({lifecycle}: PageContext<SlideService>) => {
     lifecycle.own({terminate: () => window.clearInterval(interval)})
     return (
         <Slide eyebrow="Live demo" headline="Step sequencer in 16 squares.">
-            <p>
-                Each cell below is a regular <code>&lt;div&gt;</code>. The lit pad walks through
-                the grid using the <strong>page lifecycle</strong> from openDAW's tiny JSX router —
-                navigate away and the timer is cleaned up automatically.
-            </p>
-            <div className="demo-grid">
-                {pads}
+            <div className={className}>
+                <p>
+                    Each cell below is a regular <code>&lt;div&gt;</code>. The lit pad walks through
+                    the grid using the <strong>page lifecycle</strong> from openDAW's tiny JSX router —
+                    navigate away and the timer is cleaned up automatically.
+                </p>
+                <div className="grid">
+                    {pads}
+                </div>
             </div>
         </Slide>
     )
