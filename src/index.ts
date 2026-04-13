@@ -12,6 +12,11 @@ import {EightBitBoySlide} from "@/slides/EightBitBoySlide"
 import {PreAudiotoolEraSlide} from "@/slides/PreAudiotoolEraSlide"
 import {AudiotoolSlide} from "@/slides/AudiotoolSlide"
 import {AudiotoolEscalationSlide} from "@/slides/AudiotoolEscalationSlide"
+import {StepBackSlide} from "@/slides/StepBackSlide"
+import {OpenDAWIdeasSlide} from "@/slides/OpenDAWIdeasSlide"
+import {OpenDAWAmbassadorsSlide} from "@/slides/OpenDAWAmbassadorsSlide"
+import {OpenDAWSnapshots} from "@/slides/OpenDAWSnapshots"
+import {OpenDAWTodaySlide} from "@/slides/OpenDAWTodaySlide"
 
 export type SlideService = void
 
@@ -34,5 +39,10 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/8bitboy", title: "8Bitboy", factory: EightBitBoySlide},
     {path: "/pre-audiotool-era", title: "Pre Audiotool Era", factory: PreAudiotoolEraSlide},
     {path: "/audiotool", title: "Audiotool", factory: AudiotoolSlide},
-    {path: "/audiotool-escalation", title: "Audiotool Escalation", factory: AudiotoolEscalationSlide}
+    {path: "/audiotool-escalation", title: "Audiotool Escalation", factory: AudiotoolEscalationSlide},
+    {path: "/step-back", title: "Step Back", factory: StepBackSlide},
+    {path: "/opendaw-ideas", title: "openDAW Ideas", factory: OpenDAWIdeasSlide},
+    {path: "/opendaw-ambassadors", title: "openDAW Ambassadors", factory: OpenDAWAmbassadorsSlide},
+    {path: "/opendaw-snapshots", title: "openDAW Snapshots", factory: OpenDAWSnapshots},
+    {path: "/opendaw-today", title: "openDAW Today", factory: OpenDAWTodaySlide}
 ]

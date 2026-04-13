@@ -1,0 +1,21 @@
+import css from "./StepBackSlide.sass?inline"
+import {createElement} from "@opendaw/lib-jsx"
+import {Html} from "@opendaw/lib-dom"
+import {Slide} from "@/Slide"
+
+const className = Html.adoptStyleSheet(css, "StepBack")
+
+const SHOT = "/images/me-futurama-flat.png"
+
+export const StepBackSlide = () => (
+    <Slide eyebrow="Step Back" headline="Taking a step back.">
+        <div class={className}>
+            <img class="shot" src={SHOT} alt="Taking a step back"/>
+            <ul class="bullets">
+                <li>A huge step back.</li>
+                <li>Revisiting all decisions I made.</li>
+                <li>Using the time to remember why I actually started Audiotool in the first place.</li>
+            </ul>
+        </div>
+    </Slide>
+)

@@ -1,6 +1,7 @@
 import {Terminator} from "@opendaw/lib-std"
 import {createElement, Frag, LocalLink, RouteLocation, Router} from "@opendaw/lib-jsx"
 import {SLIDES} from "@/index"
+import {runKeyIntercept} from "@/keyIntercept"
 
 export const App = () => {
     const terminator = new Terminator()
@@ -8,6 +9,7 @@ export const App = () => {
         if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {return}
         const target = event.target as HTMLElement | null
         if (target?.matches("input, textarea, [contenteditable='true']")) {return}
+        if (runKeyIntercept(event)) {return}
         const location = RouteLocation.get()
         const index = SLIDES.findIndex(slide => slide.path === location.path)
         const current = index < 0 ? 0 : index
