@@ -19,6 +19,7 @@ export const BackgroundSlide = () => (
                 <li>Failed musician.</li>
                 <li>Couldn't hold a job.</li>
                 <li>Started with Flash 4.</li>
+                <li>Got really good at it.</li>
                 <li>Known for hacky workarounds.</li>
             </ul>
         </div>

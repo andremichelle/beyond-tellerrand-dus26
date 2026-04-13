@@ -10,6 +10,7 @@ import {BasementMXSlide} from "@/slides/BasementMXSlide"
 import {FlashAudioHackSlide} from "@/slides/FlashAudioHackSlide"
 import {EightBitBoySlide} from "@/slides/EightBitBoySlide"
 import {PreAudiotoolEraSlide} from "@/slides/PreAudiotoolEraSlide"
+import {AudiotoolSlide} from "@/slides/AudiotoolSlide"
 
 export type SlideService = void
 
@@ -30,5 +31,6 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/kalimba", title: "kalimba", factory: KalimbaSlide},
     {path: "/flash-audio-hack", title: "Flash Audio Hack", factory: FlashAudioHackSlide},
     {path: "/8bitboy", title: "8Bitboy", factory: EightBitBoySlide},
-    {path: "/pre-audiotool-era", title: "Pre Audiotool Era", factory: PreAudiotoolEraSlide}
+    {path: "/pre-audiotool-era", title: "Pre Audiotool Era", factory: PreAudiotoolEraSlide},
+    {path: "/audiotool", title: "Audiotool", factory: AudiotoolSlide}
 ]

@@ -69,8 +69,8 @@ export const BasementMXSlide = () => {
                     </div>
                 </div>
                 <ul className="bullets">
-                    <li>Plays all loops at once.</li>
-                    <li>Uses <strong>SoundTransform</strong> to route the wanted audio to output.</li>
+                    <li>Starts playing all loops at once.</li>
+                    <li>Uses <strong>SoundTransform</strong> to route wanted loop to output.</li>
                 </ul>
             </div>
         </Slide>

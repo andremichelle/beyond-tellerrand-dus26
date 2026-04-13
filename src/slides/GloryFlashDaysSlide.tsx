@@ -29,6 +29,7 @@ export const GloryFlashDaysSlide = () => (
             <ul class="bullets">
                 <li>A creative community.</li>
                 <li>Everything felt new and exciting.</li>
+                <li>Every day discovered something new.</li>
                 <li>Cutting edge. <em>How did they do this?</em></li>
                 <li>The web felt like a huge playground.</li>
                 <li>No sound API beyond playing static files.</li>
