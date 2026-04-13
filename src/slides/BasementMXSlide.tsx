@@ -2,25 +2,29 @@ import css from "./BasementMXSlide.sass?inline"
 import {createElement, replaceChildren} from "@opendaw/lib-jsx"
 import {Html} from "@opendaw/lib-dom"
 import {Slide} from "@/Slide"
+import {FlashMovie} from "@/components/FlashMovie"
 
 const className = Html.adoptStyleSheet(css, "BasementMX")
 
 const BASE = "/basementmx/"
+const SWF = `${BASE}main.swf`
+const ORIGIN_WIDTH = 599
+const ORIGIN_HEIGHT = 350
+const SCALE = 1
 
 type Bank = "techno" | "triphop" | "shot"
 
-const param = (name: string, value: string) =>
-    createElement("param", {name, value})
-
-const FlashMovie = ({bank}: { bank: Bank }) => (
-    <object type="application/x-shockwave-flash" data={`${BASE}main.swf`} width="599" height="350">
-        {param("movie", `${BASE}main.swf`)}
-        {param("flashvars", `bank=${bank}`)}
-        {param("quality", "high")}
-        {param("bgcolor", "#222121")}
-        {param("base", BASE)}
-        {param("allowScriptAccess", "always")}
-    </object>
+const BankMovie = ({bank}: { bank: Bank }) => (
+    <FlashMovie
+        src={SWF}
+        width={ORIGIN_WIDTH}
+        height={ORIGIN_HEIGHT}
+        scale={SCALE}
+        base={BASE}
+        bgColor="#222121"
+        quality="high"
+        flashvars={`bank=${bank}`}
+    />
 )
 
 const Guide = () => (
@@ -46,7 +50,7 @@ const NavButton = ({base, alt, onClick}: { base: string, alt: string, onClick: (
 
 export const BasementMXSlide = () => {
     const flashHost: HTMLDivElement = (<div className="flash"/>)
-    const showBank = (bank: Bank) => replaceChildren(flashHost, <FlashMovie bank={bank}/>)
+    const showBank = (bank: Bank) => replaceChildren(flashHost, <BankMovie bank={bank}/>)
     const showGuide = () => replaceChildren(flashHost, <Guide/>)
     showBank("techno")
     return (
