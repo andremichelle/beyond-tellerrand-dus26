@@ -11,6 +11,7 @@ import {FlashAudioHackSlide} from "@/slides/FlashAudioHackSlide"
 import {EightBitBoySlide} from "@/slides/EightBitBoySlide"
 import {PreAudiotoolEraSlide} from "@/slides/PreAudiotoolEraSlide"
 import {AudiotoolSlide} from "@/slides/AudiotoolSlide"
+import {AudiotoolEscalationSlide} from "@/slides/AudiotoolEscalationSlide"
 
 export type SlideService = void
 
@@ -32,5 +33,6 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/flash-audio-hack", title: "Flash Audio Hack", factory: FlashAudioHackSlide},
     {path: "/8bitboy", title: "8Bitboy", factory: EightBitBoySlide},
     {path: "/pre-audiotool-era", title: "Pre Audiotool Era", factory: PreAudiotoolEraSlide},
-    {path: "/audiotool", title: "Audiotool", factory: AudiotoolSlide}
+    {path: "/audiotool", title: "Audiotool", factory: AudiotoolSlide},
+    {path: "/audiotool-escalation", title: "Audiotool Escalation", factory: AudiotoolEscalationSlide}
 ]

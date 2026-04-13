@@ -25,7 +25,6 @@ export const AudiotoolSlide = () => (
                 <li>Still no business model.</li>
                 <li>Chaotic management.</li>
                 <li>Slow burn-out.</li>
-                <li><strong>But... I learnt so much about everything!</strong></li>
             </ul>
         </div>
     </Slide>
