@@ -51,7 +51,8 @@ export const EightBitBoySlide = () => (
             <div class="meta">
                 <h2>What it does</h2>
                 <ul class="bullets">
-                    <li>MOD format decoder contributed by <strong>Joa Ebert</strong>.</li>
+                    <li>MOD format decoder by <strong>Joa Ebert</strong>.</li>
+                    <li>Design by Andre Stubbe.</li>
                     <li>Loads classic Amiga Protracker (1987) MOD files.</li>
                     <li>Mixes 4 channels of 8-bit samples in pure ActionScript.</li>
                     <li>Streams the result through the audio buffer hack.</li>
