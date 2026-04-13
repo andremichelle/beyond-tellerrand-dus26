@@ -68,6 +68,10 @@ export const BasementMXSlide = () => {
                         <NavButton base="guide" alt="guide" onClick={showGuide}/>
                     </div>
                 </div>
+                <ul className="bullets">
+                    <li>Plays all loops at once.</li>
+                    <li>Uses <strong>SoundTransform</strong> to route the wanted audio to output.</li>
+                </ul>
             </div>
         </Slide>
     )

@@ -7,20 +7,16 @@ import {FlashMovie} from "@/components/FlashMovie"
 const className = Html.adoptStyleSheet(css, "Delounge")
 
 const BASE = "/misc/"
-const SWF = `${BASE}delounge.swf`
-const ORIGIN_WIDTH = 300
-const ORIGIN_HEIGHT = 300
-const SCALE = 2
 
 export const DeloungeSlide = () => (
     <Slide eyebrow="Flash 5 · early 2000" headline="delounge.">
         <div class={className}>
             <div class="stage">
                 <FlashMovie
-                    src={SWF}
-                    width={ORIGIN_WIDTH}
-                    height={ORIGIN_HEIGHT}
-                    scale={SCALE}
+                    src={`${BASE}delounge.swf`}
+                    width={300}
+                    height={300}
+                    scale={2}
                     base={BASE}
                     quality="high"
                 />
