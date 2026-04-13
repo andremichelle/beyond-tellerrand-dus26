@@ -42,9 +42,6 @@ export const FlashAudioHackSlide = () => {
     return (
         <Slide eyebrow="Flash 9 · 2005" headline="The Audio Hack that started Web DSP.">
             <div className={className}>
-                <p className="note">
-                    The first time arbitrary client-computed audio could play in the browser.
-                </p>
                 <ul className="bullets">
                     <li>Real-time software synthesis in the browser</li>
                     <li>Trackers, drum machines, samplers</li>
