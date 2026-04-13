@@ -3,12 +3,14 @@ import {Circle} from "./solver"
 const TAU = Math.PI * 2
 
 export class PulsateRenderer {
-    private readonly context: CanvasRenderingContext2D
+    readonly canvas: HTMLCanvasElement
+    readonly #context: CanvasRenderingContext2D
 
-    constructor(readonly canvas: HTMLCanvasElement) {
+    constructor(canvas: HTMLCanvasElement) {
+        this.canvas = canvas
         const ctx = canvas.getContext("2d")
         if (ctx === null) {throw new Error("no 2d context")}
-        this.context = ctx
+        this.#context = ctx
     }
 
     render(circles: ReadonlyArray<Circle>): void {
@@ -19,7 +21,7 @@ export class PulsateRenderer {
             this.canvas.width = width * pixelRatio
             this.canvas.height = height * pixelRatio
         }
-        const ctx = this.context
+        const ctx = this.#context
         ctx.save()
         ctx.scale(pixelRatio, pixelRatio)
         ctx.clearRect(0, 0, width, height)

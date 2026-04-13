@@ -126,21 +126,21 @@ export class PulsateSolver {
     run(time: number, observer: (collision: Collision) => void): void {
         let remaining = time
         while (remaining > 0.0) {
-            const collision = this.detect(remaining)
+            const collision = this.#detect(remaining)
             if (collision === null) {break}
             observer(collision)
-            this.integrate(collision.time)
+            this.#integrate(collision.time)
             remaining -= collision.time
             collision.resolve()
         }
         if (remaining > 0.0) {
-            this.integrate(remaining)
+            this.#integrate(remaining)
         }
         this.collisionSelf.clear()
         this.collisionPair.clear()
     }
 
-    private detect(dt: number): Collision | null {
+    #detect(dt: number): Collision | null {
         const maxRadius = 2048.0
         let collision: Collision | null = null
         let time = dt
@@ -167,7 +167,7 @@ export class PulsateSolver {
         return collision
     }
 
-    private integrate(dt: number): void {
+    #integrate(dt: number): void {
         for (const circle of this.circles) {
             circle.radius += circle.radiusVelocity * dt
         }

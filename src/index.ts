@@ -10,6 +10,7 @@ import {BasementMXSlide} from "@/slides/BasementMXSlide"
 import {DigitalAudioSlide} from "@/slides/DigitalAudioSlide"
 import {FlashAudioHackSlide} from "@/slides/FlashAudioHackSlide"
 import {EightBitBoySlide} from "@/slides/EightBitBoySlide"
+import {ToneMatrixSlide} from "@/slides/ToneMatrixSlide"
 import {PulsateSlide} from "@/slides/PulsateSlide"
 import {PreAudiotoolEraSlide} from "@/slides/PreAudiotoolEraSlide"
 import {AudiotoolSlide} from "@/slides/AudiotoolSlide"
@@ -40,6 +41,7 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/digital-audio", title: "Digital Audio", factory: DigitalAudioSlide},
     {path: "/flash-audio-hack", title: "Flash Audio Hack", factory: FlashAudioHackSlide},
     {path: "/8bitboy", title: "8Bitboy", factory: EightBitBoySlide},
+    {path: "/tonematrix", title: "ToneMatrix", factory: ToneMatrixSlide},
     {path: "/pulsate", title: "Pulsate", factory: PulsateSlide},
     {path: "/pre-audiotool-era", title: "Pre Audiotool Era", factory: PreAudiotoolEraSlide},
     {path: "/audiotool", title: "Audiotool", factory: AudiotoolSlide},

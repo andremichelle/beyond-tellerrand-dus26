@@ -17,18 +17,21 @@ const radiusToNote = ((): (radius: number) => number => {
 const midiToHz = (note: number, base: number = 440): number => base * Math.pow(2.0, (note + 3) / 12 - 6)
 
 export class PulsateSound {
-    private readonly masterGain: GainNode
-    private readonly graphNodes: Array<AudioNode> = []
+    readonly context: AudioContext
+    readonly #masterGain: GainNode
+    readonly #graphNodes: Array<AudioNode> = []
 
-    constructor(readonly context: AudioContext, impulse: AudioBuffer) {
+    constructor(context: AudioContext, impulse: AudioBuffer) {
+        this.context = context
+
         const masterGain = context.createGain()
         masterGain.gain.value = 0.3
-        this.masterGain = masterGain
-        this.graphNodes.push(masterGain)
+        this.#masterGain = masterGain
+        this.#graphNodes.push(masterGain)
 
         const convolver = context.createConvolver()
         convolver.buffer = impulse
-        this.graphNodes.push(convolver)
+        this.#graphNodes.push(convolver)
 
         const delay = context.createDelay()
         delay.delayTime.value = 0.5
@@ -36,7 +39,7 @@ export class PulsateSound {
         feedbackGain.gain.value = 0.7
         const wetGain = context.createGain()
         wetGain.gain.value = 0.4
-        this.graphNodes.push(delay, feedbackGain, wetGain)
+        this.#graphNodes.push(delay, feedbackGain, wetGain)
 
         masterGain.connect(delay)
         delay.connect(feedbackGain)
@@ -50,7 +53,7 @@ export class PulsateSound {
         compressor.ratio.value = 20
         compressor.attack.value = 0.001
         compressor.release.value = 0.1
-        this.graphNodes.push(compressor)
+        this.#graphNodes.push(compressor)
 
         masterGain.connect(compressor)
         convolver.connect(compressor)
@@ -59,7 +62,7 @@ export class PulsateSound {
 
     advance(solver: PulsateSolver, dt: number): void {
         const context = this.context
-        const masterGain = this.masterGain
+        const masterGain = this.#masterGain
         const runStartTime = context.currentTime - dt
         let elapsed = 0
         solver.run(dt, (collision: Collision) => {
@@ -86,9 +89,9 @@ export class PulsateSound {
     }
 
     terminate(): void {
-        for (const node of this.graphNodes) {
+        for (const node of this.#graphNodes) {
             try {node.disconnect()} catch {/* ignore */}
         }
-        this.graphNodes.length = 0
+        this.#graphNodes.length = 0
     }
 }

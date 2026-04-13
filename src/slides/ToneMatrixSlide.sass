@@ -1,0 +1,31 @@
+component
+  flex: 1 1 auto
+  min-height: 0
+  overflow: hidden
+  display: flex
+  align-items: safe center
+  justify-content: safe center
+  position: relative
+
+  canvas
+    display: block
+    image-rendering: pixelated
+    cursor: crosshair
+    touch-action: none
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.6)
+    border-radius: 0.5rem
+
+  .hint
+    position: absolute
+    top: 1rem
+    left: 50%
+    transform: translateX(-50%)
+    font-size: 1rem
+    letter-spacing: 0.15em
+    text-transform: uppercase
+    color: var(--color-gray)
+    pointer-events: none
+    transition: opacity 400ms ease
+
+    &.faded
+      opacity: 0
