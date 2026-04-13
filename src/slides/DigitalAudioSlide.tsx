@@ -57,15 +57,15 @@ export const DigitalAudioSlide = () => (
                 <li>The count of numbers per second is called the sample rate. A CD stores 44100 of them every second.</li>
             </ul>
             <svg class="diagram" viewBox={`0 0 ${WIDTH} ${HEIGHT}`} preserveAspectRatio="xMidYMid meet">
-                <text x={MARGIN_X} y={40} class="axis-label">amplitude</text>
-                <text x={WIDTH - MARGIN_X} y={HEIGHT - 10} text-anchor="end" class="axis-label">time</text>
-                <line x1={MARGIN_X} y1={BASELINE} x2={WIDTH - MARGIN_X} y2={BASELINE} class="axis"/>
+                <text x={String(MARGIN_X)} y="40" class="axis-label">amplitude</text>
+                <text x={String(WIDTH - MARGIN_X)} y={String(HEIGHT - 10)} text-anchor="end" class="axis-label">time</text>
+                <line x1={String(MARGIN_X)} y1={String(BASELINE)} x2={String(WIDTH - MARGIN_X)} y2={String(BASELINE)} class="axis"/>
                 <path d={WAVE_PATH} class="wave"/>
                 {SAMPLE_POINTS.map((s) => (
                     <Frag>
-                        <line x1={s.x} y1={BASELINE} x2={s.x} y2={s.y} class="stem"/>
-                        <circle cx={s.x} cy={s.y} r={7} class="dot"/>
-                        <text x={s.x} y={VALUE_ROW_Y} text-anchor="middle" class="value">{String(s.value)}</text>
+                        <line x1={String(s.x)} y1={String(BASELINE)} x2={String(s.x)} y2={String(s.y)} class="stem"/>
+                        <circle cx={String(s.x)} cy={String(s.y)} r="7" class="dot"/>
+                        <text x={String(s.x)} y={String(VALUE_ROW_Y)} text-anchor="middle" class="value">{String(s.value)}</text>
                     </Frag>
                 ))}
             </svg>

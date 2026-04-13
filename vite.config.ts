@@ -10,11 +10,19 @@ export default defineConfig(({command}) => ({
     },
     server: {
         port: 8080,
-        host: "localhost"
+        host: "localhost",
+        headers: {
+            "Cross-Origin-Opener-Policy": "same-origin",
+            "Cross-Origin-Embedder-Policy": "credentialless"
+        }
     },
     preview: {
         port: 8080,
-        host: "localhost"
+        host: "localhost",
+        headers: {
+            "Cross-Origin-Opener-Policy": "same-origin",
+            "Cross-Origin-Embedder-Policy": "credentialless"
+        }
     },
     esbuild: {
         target: "esnext"
@@ -35,6 +43,8 @@ export default defineConfig(({command}) => ({
                         const html = readFileSync(indexPath, "utf-8")
                         server.transformIndexHtml(url, html).then(transformed => {
                             _res.setHeader("Content-Type", "text/html")
+                            _res.setHeader("Cross-Origin-Opener-Policy", "same-origin")
+                            _res.setHeader("Cross-Origin-Embedder-Policy", "credentialless")
                             _res.end(transformed)
                         }).catch(next)
                         return
