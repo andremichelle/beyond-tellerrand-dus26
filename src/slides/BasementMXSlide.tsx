@@ -1,6 +1,9 @@
+import css from "./BasementMXSlide.sass?inline"
 import {createElement, replaceChildren} from "@opendaw/lib-jsx"
+import {Html} from "@opendaw/lib-dom"
 import {Slide} from "@/Slide"
-import "./BasementMXSlide.sass"
+
+const className = Html.adoptStyleSheet(css, "BasementMX")
 
 const BASE = "/basementmx/"
 
@@ -48,7 +51,7 @@ export const BasementMXSlide = () => {
     showBank("techno")
     return (
         <Slide eyebrow="Time machine · 2001" headline="Basementmx — Flash turntables.">
-            <div className="basementmx">
+            <div className={className}>
                 <div className="stage">
                     <div className="top">
                         <img src={`${BASE}images/top.gif`} width={597} height={124} alt=""/>

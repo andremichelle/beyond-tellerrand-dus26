@@ -15,12 +15,24 @@ html, body
   overflow: hidden
   fill: white
   color: var(--color-bright)
-  background-color: var(--color-background)
+  background-color: color-mix(in srgb, red 10%, black)
   touch-action: pan-x pan-y
 
 body
+  position: relative
+
+.stage-1080
+  position: absolute
+  top: 0
+  left: 0
+  width: 1920px
+  height: 1080px
   display: flex
   flex-direction: column
+  transform-origin: 0 0
+  transform: translate(var(--stage-x, 0), var(--stage-y, 0)) scale(var(--stage-scale, 1))
+  background-color: var(--color-background)
+  overflow: hidden
 
 *, *::before, *::after
   box-sizing: border-box
@@ -70,16 +82,16 @@ a
     display: flex
     flex-direction: column
     gap: 0.2em
-    margin-bottom: 2vmin
+    margin-bottom: 3.5vmin
 
     .eyebrow
-      font-size: 0.75rem
+      font-size: 1rem
       letter-spacing: 0.25em
       text-transform: uppercase
       color: var(--color-green)
 
     h1
-      font-size: clamp(2.5rem, 3.5vmin, 2.75rem)
+      font-size: 3.5rem
       font-weight: 700
       line-height: 1.1
       color: var(--color-bright)
@@ -128,7 +140,7 @@ a
       &.active
         color: var(--color-yellow)
 
-  .step
+  .controls
     display: flex
     align-items: center
     gap: 1rem
@@ -136,6 +148,22 @@ a
 
     span.counter
       color: var(--color-cream)
+
+    button.fullscreen
+      appearance: none
+      background: transparent
+      border: 1px solid var(--color-shadow)
+      border-radius: 0.25rem
+      color: var(--color-gray)
+      font: inherit
+      font-size: 1.1rem
+      line-height: 1
+      padding: 0.2em 0.45em
+      cursor: pointer
+
+      &:hover
+        color: var(--color-bright)
+        border-color: var(--color-bright)
       font-variant-numeric: tabular-nums
 
 .bullets

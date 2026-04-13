@@ -1,5 +1,5 @@
 import {Terminator} from "@opendaw/lib-std"
-import {createElement, Frag, LocalLink, Router, RouteLocation} from "@opendaw/lib-jsx"
+import {createElement, Frag, LocalLink, RouteLocation, Router} from "@opendaw/lib-jsx"
 import {SLIDES} from "@/slides"
 
 export const App = () => {
@@ -41,13 +41,24 @@ export const App = () => {
             <nav className="nav">
                 <div className="pages">
                     <Frag>
-                        {SLIDES.map(({path, title}) => (
-                            <LocalLink href={path}>{title}</LocalLink>
+                        {SLIDES.map(({path}, index) => (
+                            <LocalLink href={path}>{index === 0 ? "Intro" : index}</LocalLink>
                         ))}
                     </Frag>
                 </div>
-                <div className="step">
-                    <span>{`${SLIDES.length} slides`}</span>
+                <div className="controls">
+                    <button
+                        type="button"
+                        className="fullscreen"
+                        title="Toggle fullscreen"
+                        onclick={() => {
+                            if (document.fullscreenElement) {
+                                document.exitFullscreen()
+                            } else {
+                                document.documentElement.requestFullscreen()
+                            }
+                        }}>⛶
+                    </button>
                 </div>
             </nav>
         </div>
