@@ -11,7 +11,7 @@ export const IntroSlide = () => (
             <h1>André Michelle</h1>
             <h2>Web developer since 1998</h2>
             <h3>andre.michelle@opendaw.org</h3>
-            <p>Founder of openDAW, a new holistic exploration of music creation inside your browser.</p>
+            <p>Founder of openDAW, a music creation environment that runs in the browser.</p>
         </div>
     </Slide>
 )

@@ -8,7 +8,7 @@ const className = Html.adoptStyleSheet(css, "PreAudiotoolEra")
 const SCREENSHOT = "/images/pre-audiotool-era.png"
 
 export const PreAudiotoolEraSlide = () => (
-    <Slide eyebrow="Pre Audiotool Era 2007" headline="The first building steps towards a complete Web DAW.">
+    <Slide eyebrow="Pre Audiotool Era 2007" headline="The first steps towards a complete Web DAW.">
         <div class={className}>
             <img class="shot" src={SCREENSHOT} alt="Pre Audiotool era"/>
             <ul class="bullets">

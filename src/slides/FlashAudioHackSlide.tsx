@@ -43,10 +43,10 @@ export const FlashAudioHackSlide = () => {
         <Slide eyebrow="Flash 9 · 2005" headline="The Audio Hack that started Web DSP.">
             <div className={className}>
                 <ul className="bullets">
-                    <li>Real-time audio synthesis in the browser</li>
-                    <li>Trackers, drum machines, samplers, synthesizers</li>
-                    <li>Effects like eq, delay, reverb</li>
-                    <li>Generative and algorithmic music</li>
+                    <li>Real-time audio synthesis in the browser.</li>
+                    <li>Trackers, drum machines, samplers, synthesizers.</li>
+                    <li>Effects like EQ, delay, reverb.</li>
+                    <li>Generative and algorithmic music.</li>
                 </ul>
                 <svg class="diagram" viewBox="0 0 1720 560" preserveAspectRatio="xMidYMid meet">
                     <defs>

@@ -20,7 +20,7 @@ export const AudiotoolSlide = () => (
                 <li>Restarting 2010 with Des Pudels Kern.</li>
                 <li>Closed 2012.</li>
                 <li>Restart in a handshake setup.</li>
-                <li>Crossing one million user.</li>
+                <li>Crossing one million users.</li>
                 <li>Two developers.</li>
                 <li>Still no business model.</li>
                 <li>Chaotic management.</li>
