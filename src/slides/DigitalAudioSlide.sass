@@ -1,0 +1,52 @@
+component
+  flex: 1 1 auto
+  display: flex
+  flex-direction: row
+  align-items: center
+  min-height: 0
+  overflow: hidden
+  gap: 3rem
+
+  ul.bullets
+    flex: 0 0 auto
+    max-width: 24em
+    order: 2
+
+  .diagram
+    flex: 1 1 auto
+    min-width: 0
+    min-height: 0
+    order: 1
+
+    .axis
+      stroke: var(--color-shadow)
+      stroke-width: 1
+      stroke-dasharray: 4 6
+
+    .wave
+      fill: none
+      stroke: var(--color-blue)
+      stroke-width: 4
+      stroke-linecap: round
+      stroke-linejoin: round
+
+    .stem
+      stroke: var(--color-shadow)
+      stroke-width: 1
+      stroke-dasharray: 2 4
+
+    .dot
+      fill: var(--color-orange)
+
+    .value
+      fill: var(--color-cream)
+      font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace
+      font-size: 20px
+      font-variant-numeric: tabular-nums
+
+    .axis-label
+      fill: var(--color-gray)
+      font-family: Rubik, sans-serif
+      font-size: 20px
+      letter-spacing: 0.15em
+      text-transform: uppercase

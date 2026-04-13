@@ -8,7 +8,7 @@ const className = Html.adoptStyleSheet(css, "OpenDAWIdeas")
 const SHOT = "/images/opendaw.png"
 
 export const OpenDAWIdeasSlide = () => (
-    <Slide eyebrow="openDAW" headline="The ideas behind openDAW.">
+    <Slide eyebrow="openDAW" headline="The birth of openDAW.">
         <div class={className}>
             <img class="shot" src={SHOT} alt="openDAW"/>
             <ul class="bullets">

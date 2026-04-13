@@ -7,6 +7,7 @@ import {DeloungeSlide} from "@/slides/DeloungeSlide"
 import {SyncboxSlide} from "@/slides/SyncboxSlide"
 import {KalimbaSlide} from "@/slides/KalimbaSlide"
 import {BasementMXSlide} from "@/slides/BasementMXSlide"
+import {DigitalAudioSlide} from "@/slides/DigitalAudioSlide"
 import {FlashAudioHackSlide} from "@/slides/FlashAudioHackSlide"
 import {EightBitBoySlide} from "@/slides/EightBitBoySlide"
 import {PreAudiotoolEraSlide} from "@/slides/PreAudiotoolEraSlide"
@@ -35,6 +36,7 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/syncbox", title: "syncbox", factory: SyncboxSlide},
     {path: "/basementmx", title: "basementmx", factory: BasementMXSlide},
     {path: "/kalimba", title: "kalimba", factory: KalimbaSlide},
+    {path: "/digital-audio", title: "Digital Audio", factory: DigitalAudioSlide},
     {path: "/flash-audio-hack", title: "Flash Audio Hack", factory: FlashAudioHackSlide},
     {path: "/8bitboy", title: "8Bitboy", factory: EightBitBoySlide},
     {path: "/pre-audiotool-era", title: "Pre Audiotool Era", factory: PreAudiotoolEraSlide},
