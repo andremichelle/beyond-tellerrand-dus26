@@ -1,7 +1,19 @@
-import {Arrays, asInstanceOf, InaccessibleProperty, int, isNotNull, Nullable, Progress, UUID} from "@opendaw/lib-std"
+import {
+    Arrays,
+    asInstanceOf,
+    InaccessibleProperty,
+    int,
+    isNotNull,
+    Nullable,
+    Progress,
+    UUID,
+    ValueMapping
+} from "@opendaw/lib-std"
 import {PPQN} from "@opendaw/lib-dsp"
 import {
     ApparatDeviceBox,
+    DattorroReverbDeviceBox,
+    DelayDeviceBox,
     MaximizerDeviceBox,
     NoteEventBox,
     NoteRegionBox,
@@ -24,7 +36,7 @@ import workletsUrl from "@opendaw/studio-core/processors.js?url"
 import workersUrl from "@opendaw/studio-core/workers-main.js?worker&url"
 import {LocalSampleProvider} from "./sample-provider"
 import {BASE_PITCH, TR909_SAMPLES} from "./samples"
-import {KnobParameter} from "./knob-parameter"
+import {FieldKnobParameter, KnobParameter, WerkstattKnobParameter} from "./knob-parameter"
 import {ParamDeclaration, parseParamDeclarations} from "./param-declarations"
 
 const fetchText = async (url: string): Promise<string> => {
@@ -61,7 +73,7 @@ const buildKnobParameters = (
     for (const decl of declarations) {
         const box = byLabel.get(decl.label)
         if (box === undefined) {continue}
-        result.push(new KnobParameter(project, box, decl))
+        result.push(new WerkstattKnobParameter(project, box, decl))
     }
     return result
 }
@@ -98,9 +110,12 @@ export type DrumComputerEngine = {
     readonly rows: int
     readonly apparatParameters: ReadonlyArray<KnobParameter>
     readonly spielwerkParameters: ReadonlyArray<KnobParameter>
+    readonly fxParameters: ReadonlyArray<KnobParameter>
 
     terminate(): void
 }
+
+const SILENT_DB = -72.0
 
 export const createDrumComputerEngine = async (): Promise<DrumComputerEngine> => {
     await ensureWorkersInstalled()
@@ -160,6 +175,16 @@ export const createDrumComputerEngine = async (): Promise<DrumComputerEngine> =>
             bassUnit.midiEffects,
             EffectFactories.Spielwerk
         ) as SpielwerkDeviceBox
+        const delayBox = api.insertEffect(
+            bassUnit.audioEffects,
+            EffectFactories.Delay
+        ) as DelayDeviceBox
+        delayBox.wet.setValue(SILENT_DB)
+        const reverbBox = api.insertEffect(
+            bassUnit.audioEffects,
+            EffectFactories.DattorroReverb
+        ) as DattorroReverbDeviceBox
+        reverbBox.wet.setValue(SILENT_DB)
         const bassRegion = api.createNoteRegion({
             trackBox: bassTrack,
             position: 0,
@@ -174,17 +199,32 @@ export const createDrumComputerEngine = async (): Promise<DrumComputerEngine> =>
             pitch: 36,
             velocity: 1.0
         })
-        return {region, apparatBox, spielwerkBox}
+        return {region, apparatBox, spielwerkBox, delayBox, reverbBox}
     }).unwrap("Failed to create TR-909 audio unit")
     await apparatCompiler.compile(audioContext, editing, created.apparatBox, apparatSource)
     await spielwerkCompiler.compile(audioContext, editing, created.spielwerkBox, spielwerkSource)
     const apparatParameters = buildKnobParameters(project, created.apparatBox, apparatDeclarations)
     const spielwerkParameters = buildKnobParameters(project, created.spielwerkBox, spielwerkDeclarations)
+    const fxParameters: ReadonlyArray<KnobParameter> = [
+        new FieldKnobParameter(project, created.delayBox.wet, {
+            label: "delay",
+            unit: "db",
+            mapping: ValueMapping.DefaultDecibel,
+            fractionDigits: 1
+        }),
+        new FieldKnobParameter(project, created.reverbBox.wet, {
+            label: "reverb",
+            unit: "db",
+            mapping: ValueMapping.DefaultDecibel,
+            fractionDigits: 1
+        })
+    ]
     project.startAudioWorklet()
     const terminate = (): void => {
         engine.stop(true)
         apparatParameters.forEach(p => p.terminate())
         spielwerkParameters.forEach(p => p.terminate())
+        fxParameters.forEach(p => p.terminate())
         project.terminate()
         audioContext.close().catch(() => {/* ignore */})
     }
@@ -197,6 +237,7 @@ export const createDrumComputerEngine = async (): Promise<DrumComputerEngine> =>
         rows,
         apparatParameters,
         spielwerkParameters,
+        fxParameters,
         terminate
     }
 }

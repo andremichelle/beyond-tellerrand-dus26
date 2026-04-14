@@ -1,12 +1,12 @@
 // @label 303 Sequencer
 // 303 Sequencer
-// @param seed     100   0     999    int
+// @param seed     209   0     999    int
 // @param length   16    1     32     int
-// @param scale    2     0     5      int
+// @param scale    1     0     5      int
 // @param octave   3     1     4      int
 // @param slides   0.2   0     1      linear
-// @param accents  0.25  0     1      linear
-// @param rests    0.15  0     1      linear
+// @param accents  0.3   0     1      linear
+// @param rests    0.2   0     1      linear
 
 class Processor {
     seed = 0

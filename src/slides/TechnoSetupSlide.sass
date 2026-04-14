@@ -52,6 +52,7 @@ component
     flex-direction: column
     align-items: center
     gap: 0.3rem
+    width: 4.75rem
     color: var(--color-cream)
 
     .name
@@ -59,12 +60,20 @@ component
       letter-spacing: 0.12em
       text-transform: uppercase
       color: var(--color-gray)
+      max-width: 100%
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
 
     .value
       font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace
       font-size: 0.75rem
       color: var(--color-cream)
       font-variant-numeric: tabular-nums
+      width: 100%
+      text-align: center
+      white-space: nowrap
+      overflow: hidden
 
     svg.knob
       width: 3rem

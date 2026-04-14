@@ -6,7 +6,7 @@
 // @param envmod     0.0   0     1      linear
 // @param decay      300   200   2000   exp     ms
 // @param accent     1.0   0     1      linear
-// @param volume     0.7   0     1      linear
+// @param volume     0.5   0     1      linear
 
 class Processor {
     waveform = 0

@@ -143,6 +143,7 @@ export const TechnoSetupSlide = () => {
                             <DrumGrid engine={engine} terminator={terminator}/>
                             <KnobColumn title="TB-303" parameters={engine.apparatParameters} terminator={terminator}/>
                             <KnobColumn title="303 Sequencer" parameters={engine.spielwerkParameters} terminator={terminator}/>
+                            <KnobColumn title="FX" parameters={engine.fxParameters} terminator={terminator}/>
                         </div>
                     ]}
                     failure={({reason, retry}) => (
