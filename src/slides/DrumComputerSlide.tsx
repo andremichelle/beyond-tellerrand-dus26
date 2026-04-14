@@ -80,7 +80,6 @@ const DrumGrid = ({engine, terminator}: {engine: DrumComputerEngine, terminator:
 
 export const DrumComputerSlide = () => {
     const terminator = new Terminator()
-
     const onConnect = (host: HTMLElement) => {
         const watch = () => {
             if (!host.isConnected) {
@@ -99,7 +98,7 @@ export const DrumComputerSlide = () => {
                     factory={() => Promises.makeAbortable(terminator, createDrumComputerEngine())}
                     loading={() => <div class="status">Loading TR-909 kit…</div>}
                     success={(engine: DrumComputerEngine) => [
-                        <div class="status">TR-909 · 120 BPM · Click steps to play</div>,
+                        <div class="status">TR-909 · 126 BPM · Click steps to play</div>,
                         <DrumGrid engine={engine} terminator={terminator}/>
                     ]}
                     failure={({reason, retry}) => (
