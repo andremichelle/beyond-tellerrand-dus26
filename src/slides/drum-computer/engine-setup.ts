@@ -65,7 +65,7 @@ export const createDrumComputerEngine = async (): Promise<DrumComputerEngine> =>
         sampleManager,
         soundfontManager,
         sampleService,
-        soundfontService: InaccessibleProperty("soundfontService")
+        soundfontService: InaccessibleProperty("soundfontService not used")
     }
     const project = Project.new(env)
     const {api, editing, engine, primaryAudioUnitBox, timelineBox: {loopArea}} = project
@@ -82,7 +82,7 @@ export const createDrumComputerEngine = async (): Promise<DrumComputerEngine> =>
         api.setBpm(126)
         const {trackBox} = api.createInstrument(InstrumentFactories.Playfield, {name: "TR-909", attachment})
         const box = api.insertEffect(primaryAudioUnitBox.audioEffects, EffectFactories.Maximizer) as MaximizerDeviceBox
-        box.threshold.setValue(-6.0)
+        box.threshold.setValue(-3.0)
         box.index.setValue(0)
         box.enabled.setValue(true)
         loopArea.enabled.setValue(true)
