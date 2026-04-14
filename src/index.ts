@@ -21,6 +21,7 @@ import {OpenDAWAmbassadorsSlide} from "@/slides/OpenDAWAmbassadorsSlide"
 import {OpenDAWSnapshotsSlide} from "@/slides/OpenDAWSnapshotsSlide"
 import {OpenDAWTodaySlide} from "@/slides/OpenDAWTodaySlide"
 import {DrumComputerSlide} from "@/slides/DrumComputerSlide"
+import {DemoTimeSlide} from "@/slides/DemoTimeSlide"
 
 export type SlideService = void
 
@@ -52,5 +53,6 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/opendaw-ambassadors", title: "openDAW Ambassadors", factory: OpenDAWAmbassadorsSlide},
     {path: "/opendaw-snapshots", title: "openDAW Snapshots", factory: OpenDAWSnapshotsSlide},
     {path: "/opendaw-today", title: "openDAW Today", factory: OpenDAWTodaySlide},
-    {path: "/drum-computer", title: "Drum Computer", factory: DrumComputerSlide}
+    {path: "/drum-computer", title: "Drum Computer", factory: DrumComputerSlide},
+    {path: "/demo-time", title: "Demo Time", factory: DemoTimeSlide}
 ]
