@@ -145,17 +145,16 @@ a
   padding: 1rem 2rem
   background-color: var(--color-panel-background-dark)
   font-size: 0.875rem
-  color: var(--color-gray)
 
   .pages
     display: flex
     gap: 1.5rem
 
     a
-      color: var(--color-dark)
+      color: rgba(white, 0.04)
 
       &.active
-        color: var(--color-purple)
+        color: rgba(white, 0.2)
 
   .controls
     display: flex
@@ -177,11 +176,34 @@ a
       line-height: 1
       padding: 0.2em 0.45em
       cursor: pointer
+      opacity: 0.2
+      transition: opacity 120ms ease, color 120ms ease, border-color 120ms ease
 
       &:hover
+        opacity: 1
         color: var(--color-bright)
         border-color: var(--color-bright)
       font-variant-numeric: tabular-nums
+
+    button.timer
+      appearance: none
+      background: transparent
+      border: 1px solid var(--color-shadow)
+      border-radius: 0.25rem
+      color: var(--color-cream)
+      font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace
+      font-size: 0.9rem
+      line-height: 1
+      padding: 0.35em 0.6em
+      cursor: pointer
+      font-variant-numeric: tabular-nums
+      opacity: 0.2
+      transition: opacity 120ms ease, color 120ms ease, border-color 120ms ease
+
+      &:hover
+        opacity: 1
+        color: var(--color-bright)
+        border-color: var(--color-bright)
 
 .bullets
   display: flex

@@ -50,6 +50,32 @@ export const App = () => {
                     </Frag>
                 </div>
                 <div className="controls">
+                    {(() => {
+                        let startedAt = Date.now()
+                        const format = (ms: number): string => {
+                            const totalSeconds = Math.floor(ms / 1000)
+                            const minutes = Math.floor(totalSeconds / 60)
+                            const seconds = totalSeconds % 60
+                            return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+                        }
+                        const timer: HTMLButtonElement = (
+                            <button
+                                type="button"
+                                className="timer"
+                                title="Click to reset"
+                                onclick={() => {
+                                    startedAt = Date.now()
+                                    timer.textContent = format(0)
+                                }}>{format(0)}</button>
+                        )
+                        const tick = () => {
+                            if (!timer.isConnected) {return}
+                            timer.textContent = format(Date.now() - startedAt)
+                            window.setTimeout(tick, 1000)
+                        }
+                        window.setTimeout(tick, 1000)
+                        return timer
+                    })()}
                     <button
                         type="button"
                         className="fullscreen"

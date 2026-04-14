@@ -23,6 +23,7 @@ import {OpenDAWTodaySlide} from "@/slides/OpenDAWTodaySlide"
 import {OpenDAWSDKSlide} from "@/slides/OpenDAWSDKSlide"
 import {LibJsxSlide} from "@/slides/LibJsxSlide"
 import {DrumComputerSlide} from "@/slides/DrumComputerSlide"
+import {GrowthSlide} from "@/slides/GrowthSlide"
 import {DemoTimeSlide} from "@/slides/DemoTimeSlide"
 
 export type SlideService = void
@@ -58,5 +59,6 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/opendaw-sdk", title: "openDAW SDK", factory: OpenDAWSDKSlide},
     {path: "/lib-jsx", title: "lib-jsx", factory: LibJsxSlide},
     {path: "/drum-computer", title: "Drum Computer", factory: DrumComputerSlide},
+    {path: "/growth", title: "Growth", factory: GrowthSlide},
     {path: "/demo-time", title: "Demo Time", factory: DemoTimeSlide}
 ]
