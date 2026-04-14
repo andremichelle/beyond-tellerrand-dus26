@@ -23,9 +23,11 @@ component
   .toolbar
     display: flex
     justify-content: flex-end
+    align-items: center
     width: 100%
+    gap: 0.5rem
 
-    button.clear
+    button
       appearance: none
       background: transparent
       border: 1px solid var(--color-shadow)
@@ -37,11 +39,15 @@ component
       text-transform: uppercase
       padding: 0.4rem 1rem
       cursor: pointer
-      transition: color 80ms ease, border-color 80ms ease
+      transition: color 80ms ease, border-color 80ms ease, background-color 80ms ease
 
       &:hover
         color: var(--color-bright)
         border-color: var(--color-bright)
+
+    button.playpause.playing
+      color: var(--color-orange)
+      border-color: color-mix(in srgb, var(--color-orange) 60%, var(--color-shadow))
 
   .grid
     display: grid

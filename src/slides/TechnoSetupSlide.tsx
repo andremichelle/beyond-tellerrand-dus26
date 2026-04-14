@@ -1,4 +1,4 @@
-import css from "./DrumComputerSlide.sass?inline"
+import css from "./TechnoSetupSlide.sass?inline"
 import {Terminator} from "@opendaw/lib-std"
 import {Await, createElement} from "@opendaw/lib-jsx"
 import {Html} from "@opendaw/lib-dom"
@@ -8,7 +8,7 @@ import {Slide} from "@/Slide"
 import {clearPattern, createDrumComputerEngine, DrumComputerEngine, toggleStep} from "./drum-computer/engine-setup"
 import {TR909_SAMPLES} from "./drum-computer/samples"
 
-const className = Html.adoptStyleSheet(css, "DrumComputer")
+const className = Html.adoptStyleSheet(css, "TechnoSetup")
 
 const STEPS = 16
 const STEP_PPQN = PPQN.SemiQuaver
@@ -35,6 +35,25 @@ const DrumGrid = ({engine, terminator}: {engine: DrumComputerEngine, terminator:
         }
         cells.push(rowCells)
     }
+    let playing = true
+    const playPauseButton: HTMLButtonElement = (
+        <button
+            type="button"
+            class="playpause playing"
+            onclick={() => {
+                if (playing) {
+                    engine.project.engine.stop(true)
+                    playing = false
+                    playPauseButton.textContent = "Play"
+                    playPauseButton.classList.remove("playing")
+                } else {
+                    engine.project.engine.play()
+                    playing = true
+                    playPauseButton.textContent = "Pause"
+                    playPauseButton.classList.add("playing")
+                }
+            }}>Pause</button>
+    )
     const clearButton: HTMLButtonElement = (
         <button
             type="button"
@@ -51,7 +70,7 @@ const DrumGrid = ({engine, terminator}: {engine: DrumComputerEngine, terminator:
     const root: HTMLDivElement = (
         <div class="drum-machine">
             {grid}
-            <div class="toolbar">{clearButton}</div>
+            <div class="toolbar">{playPauseButton}{clearButton}</div>
         </div>
     )
     let running = true
@@ -78,7 +97,7 @@ const DrumGrid = ({engine, terminator}: {engine: DrumComputerEngine, terminator:
     return root
 }
 
-export const DrumComputerSlide = () => {
+export const TechnoSetupSlide = () => {
     const terminator = new Terminator()
     const onConnect = (host: HTMLElement) => {
         const watch = () => {

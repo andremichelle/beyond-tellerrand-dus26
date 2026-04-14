@@ -22,7 +22,7 @@ import {OpenDAWSnapshotsSlide} from "@/slides/OpenDAWSnapshotsSlide"
 import {OpenDAWTodaySlide} from "@/slides/OpenDAWTodaySlide"
 import {OpenDAWSDKSlide} from "@/slides/OpenDAWSDKSlide"
 import {LibJsxSlide} from "@/slides/LibJsxSlide"
-import {DrumComputerSlide} from "@/slides/DrumComputerSlide"
+import {TechnoSetupSlide} from "@/slides/TechnoSetupSlide"
 import {GrowthSlide} from "@/slides/GrowthSlide"
 import {DemoTimeSlide} from "@/slides/DemoTimeSlide"
 
@@ -58,7 +58,7 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/opendaw-today", title: "openDAW Today", factory: OpenDAWTodaySlide},
     {path: "/opendaw-sdk", title: "openDAW SDK", factory: OpenDAWSDKSlide},
     {path: "/lib-jsx", title: "lib-jsx", factory: LibJsxSlide},
-    {path: "/drum-computer", title: "Drum Computer", factory: DrumComputerSlide},
+    {path: "/techno-setup", title: "Techno Setup", factory: TechnoSetupSlide},
     {path: "/growth", title: "Growth", factory: GrowthSlide},
     {path: "/demo-time", title: "Demo Time", factory: DemoTimeSlide}
 ]

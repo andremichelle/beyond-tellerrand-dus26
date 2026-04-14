@@ -8,7 +8,7 @@ const className = Html.adoptStyleSheet(css, "OpenDAWIdeas")
 const SHOT = "/images/opendaw.png"
 
 export const OpenDAWIdeasSlide = () => (
-    <Slide eyebrow="openDAW" headline="The birth of openDAW.">
+    <Slide eyebrow="openDAW" headline="Why You Should Do It Anyway!">
         <div class={className}>
             <img class="shot" src={SHOT} alt="openDAW"/>
             <ul class="bullets">
@@ -18,6 +18,7 @@ export const OpenDAWIdeasSlide = () => (
                 <li>Data privacy is a priority.</li>
                 <li>No accounts. Go to <strong>opendaw.studio</strong> and start creating.</li>
                 <li>Free to use.</li>
+                <li>No AI music generation.</li>
                 <li>Live collaboration for virtual classrooms and hangouts.</li>
                 <li>Taking it step by step.</li>
                 <li>No investors.</li>
