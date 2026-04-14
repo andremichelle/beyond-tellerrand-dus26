@@ -6,15 +6,15 @@ component
   flex-direction: row
   align-items: center
   justify-content: center
-  gap: 5rem
+  gap: 3rem
 
   .react-ban
     flex: 0 0 auto
     position: relative
-    width: 22rem
-    height: 22rem
+    width: 16rem
+    height: 16rem
     border-radius: 50%
-    border: 1.2rem solid #ff3b30
+    border: 1rem solid #ff3b30
     display: flex
     align-items: center
     justify-content: center
@@ -28,16 +28,50 @@ component
     &::after
       content: ""
       position: absolute
-      left: -1.2rem
-      right: -1.2rem
+      left: -1rem
+      right: -1rem
       top: 50%
-      height: 1.2rem
-      margin-top: -0.6rem
+      height: 1rem
+      margin-top: -0.5rem
       background: #ff3b30
       transform: rotate(-45deg)
       transform-origin: center
-      border-radius: 0.6rem
+      border-radius: 0.5rem
 
   ul.bullets
     flex: 0 1 auto
-    max-width: 32em
+    max-width: 22em
+
+  pre.code
+    flex: 0 1 auto
+    margin: 0
+    padding: 1.5rem 2rem
+    background: var(--color-panel-background-dark)
+    border-radius: 0.75rem
+    font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace
+    font-size: 0.95rem
+    line-height: 1.55
+    color: var(--color-gray)
+    white-space: pre
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5)
+    max-height: 100%
+    overflow: auto
+
+    .k
+      color: var(--color-orange)
+
+    .t
+      color: var(--color-green)
+
+    .n
+      color: var(--color-blue)
+
+    .fn
+      color: var(--color-cream)
+
+    .tag
+      color: var(--color-green)
+
+    .c
+      color: var(--color-shadow)
+      font-style: italic
