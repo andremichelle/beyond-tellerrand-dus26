@@ -20,6 +20,7 @@ import {OpenDAWIdeasSlide} from "@/slides/OpenDAWIdeasSlide"
 import {OpenDAWAmbassadorsSlide} from "@/slides/OpenDAWAmbassadorsSlide"
 import {OpenDAWSnapshotsSlide} from "@/slides/OpenDAWSnapshotsSlide"
 import {OpenDAWTodaySlide} from "@/slides/OpenDAWTodaySlide"
+import {ExternalGearSlide} from "@/slides/ExternalGearSlide"
 import {OpenDAWSDKSlide} from "@/slides/OpenDAWSDKSlide"
 import {LibJsxSlide} from "@/slides/LibJsxSlide"
 import {TechnoSetupSlide} from "@/slides/TechnoSetupSlide"
@@ -56,6 +57,7 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/opendaw-ambassadors", title: "openDAW Ambassadors", factory: OpenDAWAmbassadorsSlide},
     {path: "/opendaw-snapshots", title: "openDAW Snapshots", factory: OpenDAWSnapshotsSlide},
     {path: "/opendaw-today", title: "openDAW Today", factory: OpenDAWTodaySlide},
+    {path: "/external-gear", title: "External Gear", factory: ExternalGearSlide},
     {path: "/opendaw-sdk", title: "openDAW SDK", factory: OpenDAWSDKSlide},
     {path: "/lib-jsx", title: "lib-jsx", factory: LibJsxSlide},
     {path: "/techno-setup", title: "Techno Setup", factory: TechnoSetupSlide},
