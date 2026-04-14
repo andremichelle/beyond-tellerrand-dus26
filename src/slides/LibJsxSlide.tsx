@@ -46,7 +46,7 @@ export const LibJsxSlide = () => (
                 <li>Mix HTML and TypeScript.</li>
                 <li>Create reusable components.</li>
                 <li>No virtual DOM.</li>
-                <li>Around <strong>6 KB</strong> gzipped in production.</li>
+                <li>Around <strong>2 - 8 KB</strong> gzipped in production.</li>
             </ul>
             {renderCodeBlock()}
         </div>
