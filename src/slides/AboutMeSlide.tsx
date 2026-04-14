@@ -20,6 +20,7 @@ export const AboutMeSlide = () => (
                     <li>I love education.</li>
                     <li>I love creating tools.</li>
                     <li>I love open source.</li>
+                    <li>We are all standing on the shoulders of giants.</li>
                 </ul>
             </div>
         </div>

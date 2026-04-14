@@ -32,7 +32,8 @@ const SNAPSHOTS: ReadonlyArray<string> = [
     "2024-05-17.001.webp",
     "2024-05-18.001.webp",
     "2024-07-04.001.webp",
-    "2024-09-06.001.png"
+    "2024-09-06.001.png",
+    "2026-04-14.001.png"
 ]
 
 const dateOf = (file: string): string => file.slice(0, 10)

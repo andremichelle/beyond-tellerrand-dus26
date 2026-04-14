@@ -5,7 +5,7 @@ import {Slide} from "@/Slide"
 
 const className = Html.adoptStyleSheet(css, "Background")
 
-const PHOTO = "/images/am-2009.jpg"
+const PHOTO = "/images/am-90s.jpeg"
 
 export const BackgroundSlide = () => (
     <Slide eyebrow="Background" headline="A few things about me.">
@@ -20,7 +20,7 @@ export const BackgroundSlide = () => (
                 <li>Couldn't hold a job.</li>
                 <li>No training in coding or design.</li>
                 <li>Started with Flash 4.</li>
-                <li>Got really good at it.</li>
+                <li>Got really good at it?</li>
                 <li>Known for hacky workarounds.</li>
             </ul>
         </div>
