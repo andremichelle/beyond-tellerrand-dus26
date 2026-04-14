@@ -1,7 +1,14 @@
-import {Arrays, InaccessibleProperty, int, isNotNull, Nullable, Progress, UUID} from "@opendaw/lib-std"
+import {Arrays, asInstanceOf, InaccessibleProperty, int, isNotNull, Nullable, Progress, UUID} from "@opendaw/lib-std"
 import {PPQN} from "@opendaw/lib-dsp"
-import {MaximizerDeviceBox, NoteEventBox, NoteRegionBox} from "@opendaw/studio-boxes"
-import {InstrumentFactories, SoundfontMetaData} from "@opendaw/studio-adapters"
+import {
+    ApparatDeviceBox,
+    MaximizerDeviceBox,
+    NoteEventBox,
+    NoteRegionBox,
+    SpielwerkDeviceBox,
+    WerkstattParameterBox
+} from "@opendaw/studio-boxes"
+import {InstrumentFactories, ScriptCompiler, SoundfontMetaData} from "@opendaw/studio-adapters"
 import {
     AudioWorklets,
     EffectFactories,
@@ -17,6 +24,47 @@ import workletsUrl from "@opendaw/studio-core/processors.js?url"
 import workersUrl from "@opendaw/studio-core/workers-main.js?worker&url"
 import {LocalSampleProvider} from "./sample-provider"
 import {BASE_PITCH, TR909_SAMPLES} from "./samples"
+import {KnobParameter} from "./knob-parameter"
+import {ParamDeclaration, parseParamDeclarations} from "./param-declarations"
+
+const fetchText = async (url: string): Promise<string> => {
+    const response = await fetch(url)
+    if (!response.ok) {throw new Error(`Failed to fetch ${url}: ${response.status}`)}
+    return response.text()
+}
+
+const APPARAT_303_URL = "/scripts/apparat-303.js"
+const SPIELWERK_303_URL = "/scripts/spielwerk-303.js"
+
+const apparatCompiler = ScriptCompiler.create({
+    headerTag: "apparat",
+    registryName: "apparatProcessors",
+    functionName: "apparat"
+})
+const spielwerkCompiler = ScriptCompiler.create({
+    headerTag: "spielwerk",
+    registryName: "spielwerkProcessors",
+    functionName: "spielwerk"
+})
+
+const buildKnobParameters = (
+    project: Project,
+    deviceBox: ApparatDeviceBox | SpielwerkDeviceBox,
+    declarations: ReadonlyArray<ParamDeclaration>
+): ReadonlyArray<KnobParameter> => {
+    const byLabel = new Map<string, WerkstattParameterBox>()
+    for (const pointer of deviceBox.parameters.pointerHub.filter()) {
+        const box = asInstanceOf(pointer.box, WerkstattParameterBox)
+        byLabel.set(box.label.getValue(), box)
+    }
+    const result: Array<KnobParameter> = []
+    for (const decl of declarations) {
+        const box = byLabel.get(decl.label)
+        if (box === undefined) {continue}
+        result.push(new KnobParameter(project, box, decl))
+    }
+    return result
+}
 
 type PlayfieldAttachment = InstrumentFactories.PlayfieldAttachment
 
@@ -48,6 +96,8 @@ export type DrumComputerEngine = {
     readonly eventBoxes: Array<Array<Nullable<NoteEventBox>>>
     readonly steps: int
     readonly rows: int
+    readonly apparatParameters: ReadonlyArray<KnobParameter>
+    readonly spielwerkParameters: ReadonlyArray<KnobParameter>
 
     terminate(): void
 }
@@ -67,6 +117,12 @@ export const createDrumComputerEngine = async (): Promise<DrumComputerEngine> =>
         sampleService,
         soundfontService: InaccessibleProperty("soundfontService not used")
     }
+    const [apparatSource, spielwerkSource] = await Promise.all([
+        fetchText(APPARAT_303_URL),
+        fetchText(SPIELWERK_303_URL)
+    ])
+    const apparatDeclarations = parseParamDeclarations(apparatSource)
+    const spielwerkDeclarations = parseParamDeclarations(spielwerkSource)
     const project = Project.new(env)
     const {api, editing, engine, primaryAudioUnitBox, timelineBox: {loopArea}} = project
     const attachment: PlayfieldAttachment = TR909_SAMPLES.map((sample, index) => ({
@@ -78,38 +134,69 @@ export const createDrumComputerEngine = async (): Promise<DrumComputerEngine> =>
     }))
     const rows = TR909_SAMPLES.length
     const eventBoxes: Array<Array<Nullable<NoteEventBox>>> = Arrays.create(() => Arrays.create(() => null, STEPS), rows)
-    const region = editing.modify(() => {
+    const created = editing.modify(() => {
         api.setBpm(126)
         const {trackBox} = api.createInstrument(InstrumentFactories.Playfield, {name: "TR-909", attachment})
-        const box = api.insertEffect(primaryAudioUnitBox.audioEffects, EffectFactories.Maximizer) as MaximizerDeviceBox
-        box.threshold.setValue(-3.0)
-        box.index.setValue(0)
-        box.enabled.setValue(true)
+        const maximizer = api.insertEffect(primaryAudioUnitBox.audioEffects, EffectFactories.Maximizer) as MaximizerDeviceBox
+        maximizer.threshold.setValue(-3.0)
+        maximizer.index.setValue(0)
+        maximizer.enabled.setValue(true)
         loopArea.enabled.setValue(true)
         loopArea.from.setValue(0)
         loopArea.to.setValue(LOOP_DURATION)
-        return api.createNoteRegion({
+        const region = api.createNoteRegion({
             trackBox,
             position: 0,
             duration: LOOP_DURATION,
             loopDuration: LOOP_DURATION,
             name: "TR-909 Loop"
         })
+        const {
+            audioUnitBox: bassUnit,
+            instrumentBox: apparatBox,
+            trackBox: bassTrack
+        } = api.createInstrument(InstrumentFactories.Apparat, {name: "TB-303"})
+        const spielwerkBox = api.insertEffect(
+            bassUnit.midiEffects,
+            EffectFactories.Spielwerk
+        ) as SpielwerkDeviceBox
+        const bassRegion = api.createNoteRegion({
+            trackBox: bassTrack,
+            position: 0,
+            duration: LOOP_DURATION,
+            loopDuration: LOOP_DURATION,
+            name: "TB-303 Loop"
+        })
+        api.createNoteEvent({
+            owner: bassRegion,
+            position: 0,
+            duration: LOOP_DURATION,
+            pitch: 36,
+            velocity: 1.0
+        })
+        return {region, apparatBox, spielwerkBox}
     }).unwrap("Failed to create TR-909 audio unit")
+    await apparatCompiler.compile(audioContext, editing, created.apparatBox, apparatSource)
+    await spielwerkCompiler.compile(audioContext, editing, created.spielwerkBox, spielwerkSource)
+    const apparatParameters = buildKnobParameters(project, created.apparatBox, apparatDeclarations)
+    const spielwerkParameters = buildKnobParameters(project, created.spielwerkBox, spielwerkDeclarations)
     project.startAudioWorklet()
-    engine.play()
     const terminate = (): void => {
         engine.stop(true)
+        apparatParameters.forEach(p => p.terminate())
+        spielwerkParameters.forEach(p => p.terminate())
         project.terminate()
         audioContext.close().catch(() => {/* ignore */})
     }
     return {
         project,
         audioContext,
-        region,
+        region: created.region,
         eventBoxes,
         steps: STEPS,
         rows,
+        apparatParameters,
+        spielwerkParameters,
         terminate
     }
 }

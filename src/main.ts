@@ -1,6 +1,7 @@
 import "./styles.sass"
 import {initializeColors} from "@opendaw/studio-enums"
 import {OPENDAW_SDK_VERSION} from "@opendaw/studio-sdk"
+import {AnimationFrame} from "@opendaw/lib-dom"
 import {App} from "@/App"
 import {loadFonts} from "@/Fonts"
 
@@ -13,6 +14,8 @@ const stage = document.createElement("div")
 stage.className = "stage-1080"
 stage.appendChild(App())
 document.body.appendChild(stage)
+
+AnimationFrame.start(window)
 
 const updateScale = () => {
     const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080)

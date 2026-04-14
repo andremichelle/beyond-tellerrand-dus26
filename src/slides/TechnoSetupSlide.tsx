@@ -7,6 +7,8 @@ import {PPQN} from "@opendaw/lib-dsp"
 import {Slide} from "@/Slide"
 import {clearPattern, createDrumComputerEngine, DrumComputerEngine, toggleStep} from "./drum-computer/engine-setup"
 import {TR909_SAMPLES} from "./drum-computer/samples"
+import {Knob} from "./drum-computer/Knob"
+import {KnobParameter} from "./drum-computer/knob-parameter"
 
 const className = Html.adoptStyleSheet(css, "TechnoSetup")
 
@@ -14,8 +16,30 @@ const STEPS = 16
 const STEP_PPQN = PPQN.SemiQuaver
 const LOOP_PPQN = PPQN.Bar
 
+const KnobColumn = ({title, parameters, terminator}: {
+    title: string
+    parameters: ReadonlyArray<KnobParameter>
+    terminator: Terminator
+}) => {
+    const cells: Array<HTMLDivElement> = parameters.map(param => Knob({parameter: param, terminator}))
+    const root: HTMLDivElement = (
+        <div class="knob-column">
+            <div class="title">{title}</div>
+            <div class="knobs">{cells}</div>
+        </div>
+    )
+    return root
+}
+
 const DrumGrid = ({engine, terminator}: {engine: DrumComputerEngine, terminator: Terminator}) => {
     const grid: HTMLDivElement = <div class="grid"/>
+    const playheadDots: Array<HTMLDivElement> = []
+    grid.appendChild(<div class="label"/>)
+    for (let step = 0; step < STEPS; step++) {
+        const dot: HTMLDivElement = <div class="dot"/>
+        grid.appendChild(dot)
+        playheadDots.push(dot)
+    }
     const cells: Array<Array<HTMLButtonElement>> = []
     for (let row = 0; row < engine.rows; row++) {
         const rowCells: Array<HTMLButtonElement> = []
@@ -35,11 +59,11 @@ const DrumGrid = ({engine, terminator}: {engine: DrumComputerEngine, terminator:
         }
         cells.push(rowCells)
     }
-    let playing = true
+    let playing = false
     const playPauseButton: HTMLButtonElement = (
         <button
             type="button"
-            class="playpause playing"
+            class="playpause"
             onclick={() => {
                 if (playing) {
                     engine.project.engine.stop(true)
@@ -52,7 +76,7 @@ const DrumGrid = ({engine, terminator}: {engine: DrumComputerEngine, terminator:
                     playPauseButton.textContent = "Pause"
                     playPauseButton.classList.add("playing")
                 }
-            }}>Pause</button>
+            }}>Play</button>
     )
     const clearButton: HTMLButtonElement = (
         <button
@@ -73,27 +97,24 @@ const DrumGrid = ({engine, terminator}: {engine: DrumComputerEngine, terminator:
             <div class="toolbar">{playPauseButton}{clearButton}</div>
         </div>
     )
-    let running = true
-    terminator.own({
-        terminate: () => {
-            running = false
-            engine.terminate()
-        }
-    })
-    const watchPlayhead = () => {
-        if (!running) {return}
-        const pulses = engine.project.engine.position.getValue()
+    terminator.own({terminate: () => engine.terminate()})
+    let lastStep = -1
+    const render = (pulses: number) => {
         const position = ((pulses % LOOP_PPQN) + LOOP_PPQN) % LOOP_PPQN
         const currentStep = Math.floor(position / STEP_PPQN) % STEPS
+        if (currentStep === lastStep) {return}
+        lastStep = currentStep
         for (let row = 0; row < cells.length; row++) {
             const rowCells = cells[row]
             for (let step = 0; step < rowCells.length; step++) {
                 rowCells[step].classList.toggle("playing", step === currentStep)
             }
         }
-        requestAnimationFrame(watchPlayhead)
+        for (let step = 0; step < playheadDots.length; step++) {
+            playheadDots[step].classList.toggle("active", step === currentStep)
+        }
     }
-    requestAnimationFrame(watchPlayhead)
+    terminator.own(engine.project.engine.position.catchupAndSubscribe(owner => render(owner.getValue())))
     return root
 }
 
@@ -111,14 +132,18 @@ export const TechnoSetupSlide = () => {
     }
 
     return (
-        <Slide eyebrow="openDAW SDK" headline="A drum computer.">
+        <Slide eyebrow="openDAW SDK" headline="Techno setup.">
             <div class={className} onConnect={onConnect}>
                 <Await
                     factory={() => Promises.makeAbortable(terminator, createDrumComputerEngine())}
-                    loading={() => <div class="status">Loading TR-909 kit…</div>}
+                    loading={() => <div class="status">Loading TR-909 and TB-303…</div>}
                     success={(engine: DrumComputerEngine) => [
-                        <div class="status">TR-909 · 126 BPM · Click steps to play</div>,
-                        <DrumGrid engine={engine} terminator={terminator}/>
+                        <div class="status">TR-909 · TB-303 · 126 BPM</div>,
+                        <div class="stage">
+                            <DrumGrid engine={engine} terminator={terminator}/>
+                            <KnobColumn title="TB-303" parameters={engine.apparatParameters} terminator={terminator}/>
+                            <KnobColumn title="303 Sequencer" parameters={engine.spielwerkParameters} terminator={terminator}/>
+                        </div>
                     ]}
                     failure={({reason, retry}) => (
                         <div class="status">
