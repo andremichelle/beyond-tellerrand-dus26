@@ -21,6 +21,7 @@ import {OpenDAWAmbassadorsSlide} from "@/slides/OpenDAWAmbassadorsSlide"
 import {OpenDAWSnapshotsSlide} from "@/slides/OpenDAWSnapshotsSlide"
 import {OpenDAWTodaySlide} from "@/slides/OpenDAWTodaySlide"
 import {OpenDAWSDKSlide} from "@/slides/OpenDAWSDKSlide"
+import {LibJsxSlide} from "@/slides/LibJsxSlide"
 import {DrumComputerSlide} from "@/slides/DrumComputerSlide"
 import {DemoTimeSlide} from "@/slides/DemoTimeSlide"
 
@@ -55,6 +56,7 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/opendaw-snapshots", title: "openDAW Snapshots", factory: OpenDAWSnapshotsSlide},
     {path: "/opendaw-today", title: "openDAW Today", factory: OpenDAWTodaySlide},
     {path: "/opendaw-sdk", title: "openDAW SDK", factory: OpenDAWSDKSlide},
+    {path: "/lib-jsx", title: "lib-jsx", factory: LibJsxSlide},
     {path: "/drum-computer", title: "Drum Computer", factory: DrumComputerSlide},
     {path: "/demo-time", title: "Demo Time", factory: DemoTimeSlide}
 ]

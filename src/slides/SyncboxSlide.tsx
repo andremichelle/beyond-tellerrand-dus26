@@ -22,7 +22,7 @@ export const SyncboxSlide = () => (
                     height={ORIGIN_HEIGHT}
                     scale={SCALE}
                     base={BASE}
-                    quality="medium"
+                    quality="low"
                 />
             </div>
             <ul class="bullets">

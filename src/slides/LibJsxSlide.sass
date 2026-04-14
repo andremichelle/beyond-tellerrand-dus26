@@ -1,0 +1,43 @@
+component
+  flex: 1 1 auto
+  min-height: 0
+  overflow: hidden
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+  gap: 5rem
+
+  .react-ban
+    flex: 0 0 auto
+    position: relative
+    width: 22rem
+    height: 22rem
+    border-radius: 50%
+    border: 1.2rem solid #ff3b30
+    display: flex
+    align-items: center
+    justify-content: center
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.5)
+
+    img
+      width: 72%
+      height: 72%
+      display: block
+
+    &::after
+      content: ""
+      position: absolute
+      left: -1.2rem
+      right: -1.2rem
+      top: 50%
+      height: 1.2rem
+      margin-top: -0.6rem
+      background: #ff3b30
+      transform: rotate(-45deg)
+      transform-origin: center
+      border-radius: 0.6rem
+
+  ul.bullets
+    flex: 0 1 auto
+    max-width: 32em
