@@ -6,20 +6,25 @@ import {Slide} from "@/Slide"
 const className = Html.adoptStyleSheet(css, "LibJsx")
 
 const CODE_SNIPPET: string = [
-    `<span class="k">const</span> <span class="fn">Counter</span> = ({title}: {title: <span class="t">string</span>}) =&gt; {`,
-    `  <span class="k">const</span> value: <span class="t">HTMLDivElement</span> = &lt;<span class="tag">div</span>&gt;0&lt;/<span class="tag">div</span>&gt;`,
-    `  <span class="k">return</span> (`,
-    `    &lt;<span class="tag">div</span> <span class="fn">onInit</span>={() =&gt; {`,
-    `      <span class="k">let</span> count = <span class="n">0</span>`,
-    `      <span class="fn">setInterval</span>(() =&gt; {`,
-    `        value.textContent = <span class="fn">String</span>(++count)`,
-    `      }, <span class="n">1000</span>)`,
-    `    }}&gt;`,
-    `      &lt;<span class="tag">h2</span>&gt;{title}&lt;/<span class="tag">h2</span>&gt;`,
-    `      {value}`,
-    `    &lt;/<span class="tag">div</span>&gt;`,
-    `  )`,
-    `}`
+    `<span class="k">const</span> <span class="fn">Profile</span> = ({url}: {url: <span class="t">string</span>}) =&gt; (`,
+    `  &lt;<span class="tag">Await</span>`,
+    `    <span class="fn">factory</span>={() =&gt; <span class="fn">fetch</span>(url).<span class="fn">then</span>(r =&gt; r.<span class="fn">json</span>())}`,
+    `    <span class="fn">loading</span>={() =&gt; &lt;<span class="tag">div</span>&gt;Loading…&lt;/<span class="tag">div</span>&gt;}`,
+    `    <span class="fn">success</span>={({avatar, title, body}) =&gt; (`,
+    `      &lt;<span class="tag">div</span>&gt;`,
+    `        &lt;<span class="tag">img</span> <span class="fn">src</span>={avatar}/&gt;`,
+    `        &lt;<span class="tag">h2</span>&gt;{title}&lt;/<span class="tag">h2</span>&gt;`,
+    `        &lt;<span class="tag">p</span>&gt;{body}&lt;/<span class="tag">p</span>&gt;`,
+    `      &lt;/<span class="tag">div</span>&gt;`,
+    `    )}`,
+    `    <span class="fn">failure</span>={({reason, retry}) =&gt; (`,
+    `      &lt;<span class="tag">div</span>&gt;`,
+    `        Failed: {<span class="fn">String</span>(reason)}`,
+    `        &lt;<span class="tag">button</span> <span class="fn">onclick</span>={retry}&gt;Retry&lt;/<span class="tag">button</span>&gt;`,
+    `      &lt;/<span class="tag">div</span>&gt;`,
+    `    )}`,
+    `  /&gt;`,
+    `)`
 ].join("\n")
 
 const renderCodeBlock = (): HTMLPreElement => {
