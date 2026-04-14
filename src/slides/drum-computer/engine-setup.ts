@@ -1,16 +1,16 @@
-import {Nullable, Progress, UUID} from "@opendaw/lib-std"
+import {Arrays, InaccessibleProperty, int, Nullable, Progress, UUID} from "@opendaw/lib-std"
 import {PPQN} from "@opendaw/lib-dsp"
-import {NoteEventBox, NoteRegionBox} from "@opendaw/studio-boxes"
+import {MaximizerDeviceBox, NoteEventBox, NoteRegionBox} from "@opendaw/studio-boxes"
 import {InstrumentFactories, SoundfontMetaData} from "@opendaw/studio-adapters"
 import {
     AudioWorklets,
+    EffectFactories,
     GlobalSampleLoaderManager,
     GlobalSoundfontLoaderManager,
     Project,
     ProjectEnv,
     SampleService,
     SoundfontProvider,
-    SoundfontService,
     Workers
 } from "@opendaw/studio-core"
 import workletsUrl from "@opendaw/studio-core/processors.js?url"
@@ -46,65 +46,50 @@ export type DrumComputerEngine = {
     readonly audioContext: AudioContext
     readonly region: NoteRegionBox
     readonly eventBoxes: Array<Array<Nullable<NoteEventBox>>>
-    readonly steps: number
-    readonly rows: number
+    readonly steps: int
+    readonly rows: int
+
     terminate(): void
 }
 
 export const createDrumComputerEngine = async (): Promise<DrumComputerEngine> => {
-    console.log("[drum-computer] ensureWorkersInstalled")
     await ensureWorkersInstalled()
-    console.log("[drum-computer] new AudioContext")
     const audioContext = new AudioContext({latencyHint: 0})
-    console.debug(`[drum-computer] AudioContext state: ${audioContext.state}`)
-    if (!crossOriginIsolated) {
-        console.warn("[drum-computer] Page is NOT cross-origin isolated — SharedArrayBuffer will be unavailable. " +
-            "Restart the Vite dev server to pick up the new COOP/COEP headers.")
-    }
-    console.log("[drum-computer] AudioWorklets.createFor")
     const audioWorklets = await AudioWorklets.createFor(audioContext)
-    console.log("[drum-computer] sample / soundfont managers")
     const sampleManager = new GlobalSampleLoaderManager(new LocalSampleProvider())
     const soundfontManager = new GlobalSoundfontLoaderManager(stubSoundfontProvider)
     const sampleService = new SampleService(audioContext)
-    const soundfontService = Object.create(SoundfontService.prototype) as SoundfontService
     const env: ProjectEnv = {
         audioContext,
         audioWorklets,
         sampleManager,
         soundfontManager,
         sampleService,
-        soundfontService
+        soundfontService: InaccessibleProperty("soundfontService")
     }
-    console.log("[drum-computer] Project.new")
     const project = Project.new(env)
-    project.api.setBpm(120)
-
+    const {api} = project
     const attachment: PlayfieldAttachment = TR909_SAMPLES.map((sample, index) => ({
         note: BASE_PITCH + index,
         uuid: sample.uuid,
         name: sample.name,
         durationInSeconds: sample.durationInSeconds,
-        exclude: false
+        exclude: index === 4 || index === 5
     }))
-
     const rows = TR909_SAMPLES.length
-    const eventBoxes: Array<Array<Nullable<NoteEventBox>>> = Array.from(
-        {length: rows},
-        () => new Array<Nullable<NoteEventBox>>(STEPS).fill(null)
-    )
-
-    console.log("[drum-computer] editing.modify → Playfield + NoteRegion")
+    const eventBoxes: Array<Array<Nullable<NoteEventBox>>> = Arrays.create(() => Arrays.create(() => null, STEPS), rows)
     const region = project.editing.modify(() => {
-        const {trackBox} = project.api.createInstrument(
-            InstrumentFactories.Playfield,
-            {name: "TR-909", attachment}
-        )
+        api.setBpm(126)
+        const {trackBox} = api.createInstrument(InstrumentFactories.Playfield, {name: "TR-909", attachment})
+        const box = api.insertEffect(project.primaryAudioUnitBox.audioEffects, EffectFactories.Maximizer) as MaximizerDeviceBox
+        box.threshold.setValue(-6.0)
+        box.index.setValue(0)
+        box.enabled.setValue(true)
         const {loopArea} = project.timelineBox
         loopArea.enabled.setValue(true)
         loopArea.from.setValue(0)
         loopArea.to.setValue(LOOP_DURATION)
-        return project.api.createNoteRegion({
+        return api.createNoteRegion({
             trackBox,
             position: 0,
             duration: LOOP_DURATION,
@@ -112,19 +97,13 @@ export const createDrumComputerEngine = async (): Promise<DrumComputerEngine> =>
             name: "TR-909 Loop"
         })
     }).unwrap("Failed to create TR-909 audio unit")
-
-    console.log("[drum-computer] project.startAudioWorklet")
     project.startAudioWorklet()
-    console.log("[drum-computer] project.engine.play")
     project.engine.play()
-    console.log("[drum-computer] ready")
-
     const terminate = (): void => {
         project.engine.stop(true)
         project.terminate()
         audioContext.close().catch(() => {/* ignore */})
     }
-
     return {
         project,
         audioContext,
@@ -145,12 +124,27 @@ export const toggleStep = (engine: DrumComputerEngine, row: number, step: number
         engine.eventBoxes[row][step] = null
         return false
     }
-    engine.eventBoxes[row][step] = engine.project.editing.modify(() => engine.project.api.createNoteEvent({
-        owner: engine.region,
+    const {project: {editing, api}, region} = engine
+    engine.eventBoxes[row][step] = editing.modify(() => api.createNoteEvent({
+        owner: region,
         position: step * STEP_PPQN,
         duration: STEP_PPQN,
         pitch: BASE_PITCH + row,
         velocity: 1.0
     })).unwrap("Failed to create note event")
     return true
+}
+
+export const clearPattern = (engine: DrumComputerEngine): void => {
+    engine.project.editing.modify(() => {
+        for (const row of engine.eventBoxes) {
+            for (let step = 0; step < row.length; step++) {
+                const existing = row[step]
+                if (existing !== null) {
+                    existing.delete()
+                    row[step] = null
+                }
+            }
+        }
+    })
 }

@@ -1,10 +1,11 @@
 import css from "./DrumComputerSlide.sass?inline"
-import {createElement} from "@opendaw/lib-jsx"
+import {Terminator} from "@opendaw/lib-std"
+import {Await, createElement} from "@opendaw/lib-jsx"
 import {Html} from "@opendaw/lib-dom"
-import {Nullable} from "@opendaw/lib-std"
+import {Promises} from "@opendaw/lib-runtime"
 import {PPQN} from "@opendaw/lib-dsp"
 import {Slide} from "@/Slide"
-import {createDrumComputerEngine, DrumComputerEngine, toggleStep} from "./drum-computer/engine-setup"
+import {clearPattern, createDrumComputerEngine, DrumComputerEngine, toggleStep} from "./drum-computer/engine-setup"
 import {TR909_SAMPLES} from "./drum-computer/samples"
 
 const className = Html.adoptStyleSheet(css, "DrumComputer")
@@ -13,115 +14,101 @@ const STEPS = 16
 const STEP_PPQN = PPQN.SemiQuaver
 const LOOP_PPQN = PPQN.Bar
 
+const DrumGrid = ({engine, terminator}: {engine: DrumComputerEngine, terminator: Terminator}) => {
+    const grid: HTMLDivElement = <div class="grid"/>
+    const cells: Array<Array<HTMLButtonElement>> = []
+    for (let row = 0; row < engine.rows; row++) {
+        const rowCells: Array<HTMLButtonElement> = []
+        const label: HTMLDivElement = <div class="label">{TR909_SAMPLES[row].shortLabel}</div>
+        grid.appendChild(label)
+        for (let step = 0; step < STEPS; step++) {
+            const classes = ["step"]
+            if (step % 4 === 0) {classes.push("beat")}
+            const cell: HTMLButtonElement = (
+                <button
+                    type="button"
+                    class={classes.join(" ")}
+                    onclick={() => cell.classList.toggle("on", toggleStep(engine, row, step))}/>
+            )
+            grid.appendChild(cell)
+            rowCells.push(cell)
+        }
+        cells.push(rowCells)
+    }
+    const clearButton: HTMLButtonElement = (
+        <button
+            type="button"
+            class="clear"
+            onclick={() => {
+                clearPattern(engine)
+                for (const rowCells of cells) {
+                    for (const cell of rowCells) {
+                        cell.classList.remove("on")
+                    }
+                }
+            }}>Clear</button>
+    )
+    const root: HTMLDivElement = (
+        <div class="drum-machine">
+            {grid}
+            <div class="toolbar">{clearButton}</div>
+        </div>
+    )
+    let running = true
+    terminator.own({
+        terminate: () => {
+            running = false
+            engine.terminate()
+        }
+    })
+    const watchPlayhead = () => {
+        if (!running) {return}
+        const pulses = engine.project.engine.position.getValue()
+        const position = ((pulses % LOOP_PPQN) + LOOP_PPQN) % LOOP_PPQN
+        const currentStep = Math.floor(position / STEP_PPQN) % STEPS
+        for (let row = 0; row < cells.length; row++) {
+            const rowCells = cells[row]
+            for (let step = 0; step < rowCells.length; step++) {
+                rowCells[step].classList.toggle("playing", step === currentStep)
+            }
+        }
+        requestAnimationFrame(watchPlayhead)
+    }
+    requestAnimationFrame(watchPlayhead)
+    return root
+}
+
 export const DrumComputerSlide = () => {
-    const status = <span>Loading TR-909 kit…</span> as HTMLSpanElement
-    const grid = <div class="grid"/> as HTMLDivElement
+    const terminator = new Terminator()
 
     const onConnect = (host: HTMLElement) => {
-        let engine: Nullable<DrumComputerEngine> = null
-        let terminated = false
-        const cells: Array<Array<HTMLButtonElement>> = []
-
-        const buildGrid = (built: DrumComputerEngine): void => {
-            grid.innerHTML = ""
-            for (let row = 0; row < built.rows; row++) {
-                const rowCells: Array<HTMLButtonElement> = []
-                const label = <div class="label">{TR909_SAMPLES[row].shortLabel}</div>
-                grid.appendChild(label)
-                for (let step = 0; step < STEPS; step++) {
-                    const classes = ["step"]
-                    if (step % 4 === 0) {classes.push("beat")}
-                    const cell: HTMLButtonElement = (
-                        <button
-                            type="button"
-                            class={classes.join(" ")}
-                            onclick={() => {
-                                if (engine === null || terminated) {return}
-                                const on = toggleStep(engine, row, step)
-                                cell.classList.toggle("on", on)
-                            }}/>
-                    )
-                    grid.appendChild(cell)
-                    rowCells.push(cell)
-                }
-                cells.push(rowCells)
-            }
-        }
-
-        const watchPlayhead = () => {
-            if (terminated || !host.isConnected || engine === null) {
-                if (!host.isConnected) {cleanup()}
-                return
-            }
-            const pulses = engine.project.engine.position.getValue()
-            const position = ((pulses % LOOP_PPQN) + LOOP_PPQN) % LOOP_PPQN
-            const currentStep = Math.floor(position / STEP_PPQN) % STEPS
-            for (let row = 0; row < cells.length; row++) {
-                const rowCells = cells[row]
-                for (let step = 0; step < rowCells.length; step++) {
-                    rowCells[step].classList.toggle("playing", step === currentStep)
-                }
-            }
-            requestAnimationFrame(watchPlayhead)
-        }
-
-        const cleanup = (): void => {
-            if (terminated) {return}
-            terminated = true
-            if (engine !== null) {engine.terminate()}
-        }
-
-        const stallWarning = window.setTimeout(() => {
-            console.warn("[drum-computer] Engine bootstrap is taking longer than 3s — something is stuck.")
-            status.textContent = "Still loading TR-909 kit… (check console)"
-        }, 3000)
-
-        createDrumComputerEngine().then((built) => {
-            window.clearTimeout(stallWarning)
-            if (terminated) {
-                built.terminate()
-                return
-            }
-            engine = built
-            buildGrid(built)
-            if (built.audioContext.state === "suspended") {
-                console.warn("[drum-computer] AudioContext is suspended — waiting for a user gesture.")
-                status.textContent = "Click anywhere to start audio"
-                const resume = () => {
-                    host.removeEventListener("click", resume)
-                    built.audioContext.resume().then(() => {
-                        status.textContent = "TR-909 · 120 BPM · Click steps to play"
-                    }).catch((error: unknown) => {
-                        console.error("[drum-computer] resume failed", error)
-                    })
-                }
-                host.addEventListener("click", resume, {once: true})
-            } else {
-                status.textContent = "TR-909 · 120 BPM · Click steps to play"
-            }
-            requestAnimationFrame(watchPlayhead)
-        }).catch((error: unknown) => {
-            window.clearTimeout(stallWarning)
-            console.error("[drum-computer] bootstrap failed", error)
-            status.textContent = `Failed to start: ${error instanceof Error ? error.message : String(error)}`
-        })
-
-        const hostWatcher = () => {
-            if (terminated) {return}
+        const watch = () => {
             if (!host.isConnected) {
-                cleanup()
+                terminator.terminate()
                 return
             }
-            requestAnimationFrame(hostWatcher)
+            requestAnimationFrame(watch)
         }
-        requestAnimationFrame(hostWatcher)
+        requestAnimationFrame(watch)
     }
 
     return (
         <Slide eyebrow="openDAW SDK" headline="A drum computer.">
             <div class={className} onConnect={onConnect}>
-                <div class="status">{status}</div>
-                {grid}
+                <Await
+                    factory={() => Promises.makeAbortable(terminator, createDrumComputerEngine())}
+                    loading={() => <div class="status">Loading TR-909 kit…</div>}
+                    success={(engine: DrumComputerEngine) => [
+                        <div class="status">TR-909 · 120 BPM · Click steps to play</div>,
+                        <DrumGrid engine={engine} terminator={terminator}/>
+                    ]}
+                    failure={({reason, retry}) => (
+                        <div class="status">
+                            Failed to start: {String(reason)}
+                            <button type="button" onclick={retry}>Retry</button>
+                        </div>
+                    )}
+                />
             </div>
         </Slide>
     )

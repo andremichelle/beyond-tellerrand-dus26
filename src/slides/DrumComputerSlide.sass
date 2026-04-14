@@ -14,6 +14,35 @@ component
     text-transform: uppercase
     color: var(--color-gray)
 
+  .drum-machine
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 1rem
+
+  .toolbar
+    display: flex
+    justify-content: flex-end
+    width: 100%
+
+    button.clear
+      appearance: none
+      background: transparent
+      border: 1px solid var(--color-shadow)
+      border-radius: 0.35rem
+      color: var(--color-gray)
+      font: inherit
+      font-size: 0.85rem
+      letter-spacing: 0.15em
+      text-transform: uppercase
+      padding: 0.4rem 1rem
+      cursor: pointer
+      transition: color 80ms ease, border-color 80ms ease
+
+      &:hover
+        color: var(--color-bright)
+        border-color: var(--color-bright)
+
   .grid
     display: grid
     grid-template-columns: 5rem repeat(16, 2.4rem)

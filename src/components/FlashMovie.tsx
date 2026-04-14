@@ -11,12 +11,44 @@ export type FlashMovieProps = {
     flashvars?: string
 }
 
-const pixelateRufflePlayer = (host: HTMLElement, scale: number) => {
+type RufflePlayer = HTMLElement & {
+    load: (config: {
+        url: string
+        base?: string
+        parameters?: Record<string, string>
+        backgroundColor?: string
+        quality?: string
+    }) => Promise<void>
+    pause?: () => void
+    shadowRoot: ShadowRoot | null
+}
+
+type RuffleSourceAPI = {
+    createPlayer: () => RufflePlayer
+}
+
+type RuffleGlobal = {
+    newest: () => RuffleSourceAPI | null
+}
+
+declare global {
+    interface Window {
+        RufflePlayer?: RuffleGlobal & Record<string, unknown>
+    }
+}
+
+const parseFlashvars = (flashvars: string | undefined): Record<string, string> => {
+    if (flashvars === undefined) {return {}}
+    const result: Record<string, string> = {}
+    new URLSearchParams(flashvars).forEach((value, key) => {result[key] = value})
+    return result
+}
+
+const pixelatePlayer = (player: RufflePlayer, scale: number, shouldStop: () => boolean): void => {
     const tryApply = () => {
-        const player = host.querySelector("ruffle-player, ruffle-object") as HTMLElement | null
-        const shadow = (player as unknown as { shadowRoot: ShadowRoot | null } | null)?.shadowRoot ?? null
-        const canvas = shadow?.querySelector("canvas") ?? null
-        if (player !== null && canvas !== null) {
+        if (shouldStop()) {return}
+        const canvas = player.shadowRoot?.querySelector("canvas") ?? null
+        if (canvas !== null) {
             player.style.transform = `scale(${scale})`
             player.style.transformOrigin = "top left"
             canvas.style.imageRendering = "pixelated"
@@ -37,24 +69,53 @@ export const FlashMovie = ({
     quality = "low",
     flashvars
 }: FlashMovieProps) => {
-    const onConnect = scale === 1
-        ? undefined
-        : (host: HTMLElement) => pixelateRufflePlayer(host, scale)
+    const onConnect = (host: HTMLElement) => {
+        let disconnected = false
+        const shouldStop = () => disconnected
+        const api = window.RufflePlayer?.newest?.() ?? null
+        if (api === null) {
+            console.warn("FlashMovie: window.RufflePlayer is not available")
+            return
+        }
+        const player = api.createPlayer()
+        player.style.width = `${width}px`
+        player.style.height = `${height}px`
+        host.appendChild(player)
+        const loadPromise = player.load({
+            url: src,
+            base,
+            parameters: parseFlashvars(flashvars),
+            backgroundColor: bgColor,
+            quality
+        })
+        loadPromise.then(() => {
+            if (disconnected) {
+                try {player.pause?.()} catch {/* ignore */}
+                player.remove()
+            }
+        }).catch((reason: unknown) => {
+            if (!disconnected) {console.warn("FlashMovie: load failed", reason)}
+        })
+        if (scale !== 1) {
+            pixelatePlayer(player, scale, shouldStop)
+        }
+        const watch = () => {
+            if (disconnected) {return}
+            if (!host.isConnected) {
+                disconnected = true
+                try {player.pause?.()} catch {/* ignore */}
+                player.remove()
+                return
+            }
+            requestAnimationFrame(watch)
+        }
+        requestAnimationFrame(watch)
+    }
     return (
         <div class="flash-movie" style={{
             width: `${width * scale}px`,
             height: `${height * scale}px`,
             position: "relative"
-        }} onConnect={onConnect}>
-            <object type="application/x-shockwave-flash" data={src}
-                    width={String(width)} height={String(height)}>
-                <param name="movie" value={src}/>
-                {flashvars !== undefined && <param name="flashvars" value={flashvars}/>}
-                <param name="quality" value={quality}/>
-                <param name="bgcolor" value={bgColor}/>
-                {base !== undefined && <param name="base" value={base}/>}
-                <param name="allowScriptAccess" value="always"/>
-            </object>
-        </div>
+        }} onConnect={onConnect}/>
     )
 }
