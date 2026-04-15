@@ -153,7 +153,7 @@ export const createDrumComputerEngine = async (): Promise<DrumComputerEngine> =>
         api.setBpm(126)
         const {trackBox} = api.createInstrument(InstrumentFactories.Playfield, {name: "TR-909", attachment})
         const maximizer = api.insertEffect(primaryAudioUnitBox.audioEffects, EffectFactories.Maximizer) as MaximizerDeviceBox
-        maximizer.threshold.setValue(-3.0)
+        maximizer.threshold.setValue(-1.5)
         maximizer.index.setValue(0)
         maximizer.enabled.setValue(true)
         loopArea.enabled.setValue(true)

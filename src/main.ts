@@ -2,8 +2,27 @@ import "./styles.sass"
 import {initializeColors} from "@opendaw/studio-enums"
 import {OPENDAW_SDK_VERSION} from "@opendaw/studio-sdk"
 import {AnimationFrame} from "@opendaw/lib-dom"
+import {RouteLocation} from "@opendaw/lib-jsx"
 import {App} from "@/App"
 import {loadFonts} from "@/Fonts"
+
+const ROUTE_BASE = import.meta.env.BASE_URL.replace(/\/$/, "")
+if (ROUTE_BASE !== "") {
+    const proto = RouteLocation.prototype as RouteLocation
+    const origPath = Object.getOwnPropertyDescriptor(proto, "path")!.get!
+    Object.defineProperty(proto, "path", {
+        configurable: true,
+        get(this: RouteLocation): string {
+            const p: string = origPath.call(this)
+            if (p === ROUTE_BASE || p === `${ROUTE_BASE}/`) {return "/"}
+            return p.startsWith(`${ROUTE_BASE}/`) ? p.slice(ROUTE_BASE.length) : p
+        }
+    })
+    const origNav = proto.navigateTo
+    proto.navigateTo = function(this: RouteLocation, path: string): boolean {
+        return origNav.call(this, `${ROUTE_BASE}${path}`)
+    }
+}
 
 initializeColors(document.documentElement)
 console.debug(`openDAW SDK ${OPENDAW_SDK_VERSION}`)
