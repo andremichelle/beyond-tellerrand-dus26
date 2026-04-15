@@ -29,6 +29,7 @@ import {OpenDAWSDKSlide} from "@/slides/OpenDAWSDKSlide"
 import {LibJsxSlide} from "@/slides/LibJsxSlide"
 import {LibBoxSlide} from "@/slides/LibBoxSlide"
 import {Orange3Slide} from "@/slides/Orange3Slide"
+import {OpenUpSlide} from "@/slides/OpenUpSlide"
 import {TechnoSetupSlide} from "@/slides/TechnoSetupSlide"
 import {GrowthSlide} from "@/slides/GrowthSlide"
 import {DemoTimeSlide} from "@/slides/DemoTimeSlide"
@@ -67,11 +68,12 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/opendaw-features", title: "openDAW Features", factory: OpenDAWFeaturesSlide},
     {path: "/script-editor", title: "Script Editor", factory: ScriptEditorSlide},
     {path: "/piano-tutorial", title: "Piano Tutorial", factory: PianoTutorialSlide},
-    {path: "/opendaw-sdk", title: "openDAW SDK", factory: OpenDAWSDKSlide},
     {path: "/lib-jsx", title: "lib-jsx", factory: LibJsxSlide},
     {path: "/lib-box", title: "lib-box", factory: LibBoxSlide},
     {path: "/orange3", title: "orange3", factory: Orange3Slide},
+    {path: "/open-up", title: "Ilir Bajri Open Up", factory: OpenUpSlide},
     {path: "/external-gear", title: "External Gear", factory: ExternalGearSlide},
+    {path: "/opendaw-sdk", title: "openDAW SDK", factory: OpenDAWSDKSlide},
     {path: "/techno-setup", title: "Techno Setup", factory: TechnoSetupSlide},
     {path: "/growth", title: "Growth", factory: GrowthSlide},
     {path: "/demo-time", title: "Demo Time", factory: DemoTimeSlide}
