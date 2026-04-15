@@ -33,6 +33,7 @@ import {OpenUpSlide} from "@/slides/OpenUpSlide"
 import {TechnoSetupSlide} from "@/slides/TechnoSetupSlide"
 import {GrowthSlide} from "@/slides/GrowthSlide"
 import {DemoTimeSlide} from "@/slides/DemoTimeSlide"
+import {QRCodeSlide} from "@/slides/QRCodeSlide"
 
 export type SlideService = void
 
@@ -76,5 +77,6 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/opendaw-sdk", title: "openDAW SDK", factory: OpenDAWSDKSlide},
     {path: "/techno-setup", title: "Techno Setup", factory: TechnoSetupSlide},
     {path: "/growth", title: "Growth", factory: GrowthSlide},
-    {path: "/demo-time", title: "Demo Time", factory: DemoTimeSlide}
+    {path: "/demo-time", title: "Demo Time", factory: DemoTimeSlide},
+    {path: "/qr", title: "QR", factory: QRCodeSlide}
 ]
