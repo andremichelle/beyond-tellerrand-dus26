@@ -9,7 +9,7 @@ const VIDEO_URL = "/opendaw/video/2600.mp4"
 
 export const ExternalGearSlide = () => {
     const video: HTMLVideoElement = (
-        <video src={VIDEO_URL} loop playsinline controls/>
+        <video src={VIDEO_URL} playsinline controls/>
     )
     return (
         <Slide eyebrow="External Gear" headline="openDAW talks to your gear.">

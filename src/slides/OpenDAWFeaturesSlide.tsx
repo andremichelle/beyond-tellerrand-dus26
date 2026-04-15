@@ -28,11 +28,12 @@ const FEATURES: ReadonlyArray<string> = [
     "LiveRooms",
     "Shortcut Manager",
     "DAWproject In / Out",
-    "Piano Tutorial Mode"
+    "Piano Tutorial Mode",
+    "Video Export"
 ]
 
 export const OpenDAWFeaturesSlide = () => (
-    <Slide eyebrow="openDAW" headline="All the things.">
+    <Slide eyebrow="openDAW" headline="All the features.">
         <div class={className}>
             <div class="grid">
                 {FEATURES.map(feature => <div class="item">{feature}</div>)}

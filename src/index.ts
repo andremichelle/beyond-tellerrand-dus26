@@ -20,11 +20,15 @@ import {OpenDAWIdeasSlide} from "@/slides/OpenDAWIdeasSlide"
 import {OpenDAWAmbassadorsSlide} from "@/slides/OpenDAWAmbassadorsSlide"
 import {OpenDAWSnapshotsSlide} from "@/slides/OpenDAWSnapshotsSlide"
 import {OpenDAWTodaySlide} from "@/slides/OpenDAWTodaySlide"
+import {OpenDAWStatsSlide} from "@/slides/OpenDAWStatsSlide"
 import {ExternalGearSlide} from "@/slides/ExternalGearSlide"
 import {OpenDAWFeaturesSlide} from "@/slides/OpenDAWFeaturesSlide"
+import {ScriptEditorSlide} from "@/slides/ScriptEditorSlide"
+import {PianoTutorialSlide} from "@/slides/PianoTutorialSlide"
 import {OpenDAWSDKSlide} from "@/slides/OpenDAWSDKSlide"
 import {LibJsxSlide} from "@/slides/LibJsxSlide"
 import {LibBoxSlide} from "@/slides/LibBoxSlide"
+import {Orange3Slide} from "@/slides/Orange3Slide"
 import {TechnoSetupSlide} from "@/slides/TechnoSetupSlide"
 import {GrowthSlide} from "@/slides/GrowthSlide"
 import {DemoTimeSlide} from "@/slides/DemoTimeSlide"
@@ -59,11 +63,15 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/opendaw-ambassadors", title: "openDAW Ambassadors", factory: OpenDAWAmbassadorsSlide},
     {path: "/opendaw-snapshots", title: "openDAW Snapshots", factory: OpenDAWSnapshotsSlide},
     {path: "/opendaw-today", title: "openDAW Today", factory: OpenDAWTodaySlide},
+    {path: "/opendaw-stats", title: "openDAW Stats", factory: OpenDAWStatsSlide},
     {path: "/opendaw-features", title: "openDAW Features", factory: OpenDAWFeaturesSlide},
-    {path: "/external-gear", title: "External Gear", factory: ExternalGearSlide},
+    {path: "/script-editor", title: "Script Editor", factory: ScriptEditorSlide},
+    {path: "/piano-tutorial", title: "Piano Tutorial", factory: PianoTutorialSlide},
     {path: "/opendaw-sdk", title: "openDAW SDK", factory: OpenDAWSDKSlide},
     {path: "/lib-jsx", title: "lib-jsx", factory: LibJsxSlide},
     {path: "/lib-box", title: "lib-box", factory: LibBoxSlide},
+    {path: "/orange3", title: "orange3", factory: Orange3Slide},
+    {path: "/external-gear", title: "External Gear", factory: ExternalGearSlide},
     {path: "/techno-setup", title: "Techno Setup", factory: TechnoSetupSlide},
     {path: "/growth", title: "Growth", factory: GrowthSlide},
     {path: "/demo-time", title: "Demo Time", factory: DemoTimeSlide}

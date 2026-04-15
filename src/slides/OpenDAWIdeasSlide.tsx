@@ -16,6 +16,7 @@ export const OpenDAWIdeasSlide = () => (
                 <li>Open-source. If everybody owns it, nobody can steal it.</li>
                 <li>Merge education and fun.</li>
                 <li>Data privacy is a priority.</li>
+                <li>No cookie banner.</li>
                 <li>No accounts. Go to <strong>opendaw.studio</strong> and start creating.</li>
                 <li>Free to use.</li>
                 <li>No AI music generation.</li>

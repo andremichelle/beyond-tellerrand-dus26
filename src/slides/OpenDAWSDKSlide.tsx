@@ -28,7 +28,7 @@ const SDK_PACKAGES: ReadonlyArray<Package> = [
 ]
 
 export const OpenDAWSDKSlide = () => (
-    <Slide eyebrow="openDAW SDK" headline="The foundation.">
+    <Slide eyebrow="openDAW SDK" headline="Build your own DAW.">
         <div class={className}>
             <div class="cloud">
                 {SDK_PACKAGES.map(pkg => (
