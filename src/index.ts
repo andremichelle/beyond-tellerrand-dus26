@@ -31,6 +31,7 @@ import {LibBoxSlide} from "@/slides/LibBoxSlide"
 import {Orange3Slide} from "@/slides/Orange3Slide"
 import {OpenUpSlide} from "@/slides/OpenUpSlide"
 import {TechnoSetupSlide} from "@/slides/TechnoSetupSlide"
+import {AICodingSlide} from "@/slides/AICodingSlide"
 import {GrowthSlide} from "@/slides/GrowthSlide"
 import {DemoTimeSlide} from "@/slides/DemoTimeSlide"
 import {QRCodeSlide} from "@/slides/QRCodeSlide"
@@ -76,6 +77,7 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/external-gear", title: "External Gear", factory: ExternalGearSlide},
     {path: "/opendaw-sdk", title: "openDAW SDK", factory: OpenDAWSDKSlide},
     {path: "/techno-setup", title: "Techno Setup", factory: TechnoSetupSlide},
+    {path: "/ai-coding", title: "AI Coding", factory: AICodingSlide},
     {path: "/growth", title: "Growth", factory: GrowthSlide},
     {path: "/demo-time", title: "Demo Time", factory: DemoTimeSlide},
     {path: "/qr", title: "QR", factory: QRCodeSlide}
