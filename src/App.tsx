@@ -51,13 +51,32 @@ export const App = () => {
                 </div>
                 <div className="controls">
                     {(() => {
+                        const HALF = 5
+                        const BAR_LEN = HALF * 2
                         let startedAt = Date.now()
-                        const format = (ms: number): string => {
+                        let currentSlide = 0
+                        RouteLocation.get().catchupAndSubscribe(location => {
+                            const idx = SLIDES.findIndex(s => s.path === location.path)
+                            currentSlide = idx < 0 ? 0 : idx
+                        })
+                        const formatTime = (ms: number): string => {
                             const totalSeconds = Math.floor(ms / 1000)
                             const minutes = Math.floor(totalSeconds / 60)
                             const seconds = totalSeconds % 60
                             return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
                         }
+                        const renderPace = (elapsed: number): string => {
+                            const expected = elapsed / 60000
+                            const deviation = currentSlide - expected
+                            const pos = Math.round(HALF + Math.max(-HALF, Math.min(HALF, deviation)))
+                            const chars = Array(BAR_LEN + 1).fill("\u2550")
+                            chars[HALF] = "+"
+                            if (pos !== HALF) {chars[pos] = "\u2502"}
+                            return chars.join("")
+                        }
+                        const pace: HTMLSpanElement = (
+                            <span className="pace" title="Pacing">{renderPace(0)}</span>
+                        )
                         const timer: HTMLButtonElement = (
                             <button
                                 type="button"
@@ -65,16 +84,19 @@ export const App = () => {
                                 title="Click to reset"
                                 onclick={() => {
                                     startedAt = Date.now()
-                                    timer.textContent = format(0)
-                                }}>{format(0)}</button>
+                                    timer.textContent = formatTime(0)
+                                    pace.textContent = renderPace(0)
+                                }}>{formatTime(0)}</button>
                         )
                         const tick = () => {
                             if (!timer.isConnected) {return}
-                            timer.textContent = format(Date.now() - startedAt)
+                            const elapsed = Date.now() - startedAt
+                            timer.textContent = formatTime(elapsed)
+                            pace.textContent = renderPace(elapsed)
                             window.setTimeout(tick, 1000)
                         }
                         window.setTimeout(tick, 1000)
-                        return timer
+                        return <Frag>{pace}{timer}</Frag>
                     })()}
                     <button
                         type="button"
