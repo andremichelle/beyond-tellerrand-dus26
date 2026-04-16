@@ -22,6 +22,7 @@ export const AICodingSlide = () => (
                     <li>Make a dry run and present all arising issues (one by one).</li>
                     <li>Write tests as much as possible. Cover all cases.</li>
                     <li><strong>Read the plan!</strong></li>
+                    <li><strong>Never blindly trust an AI!</strong></li>
                     <li>Implement meaningful steps that compile and can be reviewed.</li>
                 </ul>
             </div>
