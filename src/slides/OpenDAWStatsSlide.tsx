@@ -5,7 +5,7 @@ import {Slide} from "@/Slide"
 
 const className = Html.adoptStyleSheet(css, "OpenDAWStats")
 
-const IMAGE = "/images/opendaw-stats.png"
+const IMAGE = "/images/opendaw-stats.webp"
 
 export const OpenDAWStatsSlide = () => (
     <Slide eyebrow="openDAW" headline="By the numbers.">

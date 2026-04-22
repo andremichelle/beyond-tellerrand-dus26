@@ -26,11 +26,11 @@ export const EightBitBoySlide = () => (
                 <h2>What it does</h2>
                 <ul class="bullets">
                     <li>MOD format decoder by <strong>Joa Ebert</strong>.</li>
-                    <li>Design by André Stubbe.</li>
+                    <li>Design by <strong>André Stubbe</strong>.</li>
                     <li>Loads classic Amiga Protracker (1990) MOD files.</li>
                     <li>Mixes 4 channels of 8-bit samples in pure ActionScript.</li>
                     <li>Streams the result through the audio buffer hack.</li>
-                    <li>Player is about 32 KB.</li>
+                    <li>Player is about 32 KB (including graphics).</li>
                     <li>Tiny MOD files: typically <strong>7 to 150 KB</strong> per song.</li>
                 </ul>
             </div>

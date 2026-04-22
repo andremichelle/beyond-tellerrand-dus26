@@ -5,7 +5,7 @@ import {Slide} from "@/Slide"
 
 const className = Html.adoptStyleSheet(css, "Audiotool")
 
-const SCREENSHOT = "/images/audiotool.png"
+const SCREENSHOT = "/images/audiotool.webp"
 
 export const AudiotoolSlide = () => (
     <Slide eyebrow="Audiotool 2007/10" headline="The Audiotool in the room.">
@@ -16,7 +16,7 @@ export const AudiotoolSlide = () => (
                 <li>Got paid for my dream project.</li>
                 <li>No boundaries.</li>
                 <li>No business model.</li>
-                <li>Parent company Hobnox closed doors.</li>
+                <li>Parent company Hobnox closed doors due to mismanagement.</li>
                 <li>Restarting 2010 with Des Pudels Kern.</li>
                 <li>Closed 2012.</li>
                 <li>Restart in a handshake setup.</li>
@@ -25,7 +25,6 @@ export const AudiotoolSlide = () => (
                 <li>Still no business model.</li>
                 <li>Chaotic management.</li>
                 <li>Slow burn-out.</li>
-                <li>Slow bore-out.</li>
             </ul>
         </div>
     </Slide>

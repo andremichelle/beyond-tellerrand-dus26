@@ -20,7 +20,7 @@ const AMBASSADORS: ReadonlyArray<Ambassador> = [
     {
         name: "polarity",
         image: "/ambassadors/polarity.webp",
-        bio: "Electronic music producer and open source advocate behind producer-network.de and a 21k subscriber Bitwig tutorial channel."
+        bio: "Electronic music producer and open source advocate behind producer-network.de and a 30k subscriber Bitwig tutorial channel."
     },
     {
         name: "Daniel Yehezkeli",

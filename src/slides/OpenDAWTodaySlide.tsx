@@ -5,7 +5,7 @@ import {Slide} from "@/Slide"
 
 const className = Html.adoptStyleSheet(css, "OpenDAWToday")
 
-const SHOT = "/images/opendaw-box.png"
+const SHOT = "/images/opendaw-box.webp"
 
 export const OpenDAWTodaySlide = () => (
     <Slide eyebrow="openDAW" headline="Where openDAW is today.">
@@ -13,9 +13,8 @@ export const OpenDAWTodaySlide = () => (
             <img class="shot" src={SHOT} alt="openDAW"/>
             <ul class="bullets">
                 <li>openDAW is now online.</li>
-                <li>Funded by two <strong>openDAW SDK</strong> consumers.</li>
+                <li>Funded by two commercial <strong>openDAW SDK</strong> consumers.</li>
                 <li>Will be the tool for the next semesters at Hochschule für Musik und Tanz Köln <strong>(Cologne University of Music and Dance)</strong>.</li>
-                <li>Proposed DAW for <strong>remix.ruhr</strong>.</li>
                 <li>Official 1.0 release on September 1st, 2026.</li>
             </ul>
         </div>

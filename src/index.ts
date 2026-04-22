@@ -26,6 +26,7 @@ import {OpenDAWFeaturesSlide} from "@/slides/OpenDAWFeaturesSlide"
 import {ScriptEditorSlide} from "@/slides/ScriptEditorSlide"
 import {PianoTutorialSlide} from "@/slides/PianoTutorialSlide"
 import {OpenDAWSDKSlide} from "@/slides/OpenDAWSDKSlide"
+import {RiffleSlide} from "@/slides/RiffleSlide"
 import {LibJsxSlide} from "@/slides/LibJsxSlide"
 import {LibBoxSlide} from "@/slides/LibBoxSlide"
 import {Orange3Slide} from "@/slides/Orange3Slide"
@@ -68,14 +69,15 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/opendaw-today", title: "openDAW Today", factory: OpenDAWTodaySlide},
     {path: "/opendaw-stats", title: "openDAW Stats", factory: OpenDAWStatsSlide},
     {path: "/opendaw-features", title: "openDAW Features", factory: OpenDAWFeaturesSlide},
+    {path: "/open-up", title: "Ilir Bajri Open Up", factory: OpenUpSlide},
     {path: "/script-editor", title: "Script Editor", factory: ScriptEditorSlide},
     {path: "/piano-tutorial", title: "Piano Tutorial", factory: PianoTutorialSlide},
     {path: "/lib-jsx", title: "lib-jsx", factory: LibJsxSlide},
     {path: "/lib-box", title: "lib-box", factory: LibBoxSlide},
     {path: "/orange3", title: "orange3", factory: Orange3Slide},
-    {path: "/open-up", title: "Ilir Bajri Open Up", factory: OpenUpSlide},
     {path: "/external-gear", title: "External Gear", factory: ExternalGearSlide},
     {path: "/opendaw-sdk", title: "openDAW SDK", factory: OpenDAWSDKSlide},
+    {path: "/riffle", title: "Riffle", factory: RiffleSlide},
     {path: "/techno-setup", title: "Techno Setup", factory: TechnoSetupSlide},
     {path: "/ai-coding", title: "AI Coding", factory: AICodingSlide},
     {path: "/growth", title: "Growth", factory: GrowthSlide},

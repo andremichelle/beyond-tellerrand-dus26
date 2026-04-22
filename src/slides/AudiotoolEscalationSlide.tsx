@@ -5,7 +5,7 @@ import {Slide} from "@/Slide"
 
 const className = Html.adoptStyleSheet(css, "AudiotoolEscalation")
 
-const SCREENSHOT = "/images/github.png"
+const SCREENSHOT = "/images/github.webp"
 
 export const AudiotoolEscalationSlide = () => (
     <Slide eyebrow="Audiotool Escalation" headline="It fell apart.">

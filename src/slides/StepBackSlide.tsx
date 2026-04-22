@@ -5,7 +5,7 @@ import {Slide} from "@/Slide"
 
 const className = Html.adoptStyleSheet(css, "StepBack")
 
-const SHOT = "/images/me-futurama-flat.png"
+const SHOT = "/images/me-futurama-flat.webp"
 
 export const StepBackSlide = () => (
     <Slide eyebrow="Step Back" headline="Taking a step back.">

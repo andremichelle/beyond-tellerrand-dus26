@@ -37,13 +37,14 @@ export const OpenDAWSDKSlide = () => (
             </div>
             <div class="content">
                 <pre class="snippet">
-                    <span class="key">"@opendaw/studio-sdk"</span>: <span class="value">"^0.0.132"</span>
+                    <span class="key">"@opendaw/studio-sdk"</span>: <span class="value">"^0.0.135"</span>
                 </pre>
                 <ul class="bullets">
                     <li>One line package dependency.</li>
                     <li>Tree-shakable.</li>
                     <li>Lots of useful code and data structures.</li>
                     <li>Audio engine with stock devices.</li>
+                    <li>Clipboard, Preset, Project Api</li>
                 </ul>
             </div>
         </div>

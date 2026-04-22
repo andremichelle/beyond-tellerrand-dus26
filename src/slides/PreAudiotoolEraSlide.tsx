@@ -5,7 +5,7 @@ import {Slide} from "@/Slide"
 
 const className = Html.adoptStyleSheet(css, "PreAudiotoolEra")
 
-const SCREENSHOT = "/images/pre-audiotool-era.png"
+const SCREENSHOT = "/images/pre-audiotool-era.webp"
 
 export const PreAudiotoolEraSlide = () => (
     <Slide eyebrow="Pre Audiotool Era 2007" headline="The first steps towards a complete Web DAW.">

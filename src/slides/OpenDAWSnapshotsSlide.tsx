@@ -7,21 +7,21 @@ import {consumePendingNavDirection, setKeyIntercept} from "@/keyIntercept"
 const className = Html.adoptStyleSheet(css, "OpenDAWSnapshots")
 
 const SNAPSHOTS: ReadonlyArray<string> = [
-    "2023-11-21.001.png",
-    "2023-11-22.001.png",
-    "2023-12-02.001.png",
-    "2023-12-06.001.png",
-    "2024-02-28.001.png",
-    "2024-03-05.001.png",
-    "2024-03-09.001.png",
-    "2024-03-14.001.png",
-    "2024-03-15.001.png",
-    "2024-03-26.001.png",
+    "2023-11-21.001.webp",
+    "2023-11-22.001.webp",
+    "2023-12-02.001.webp",
+    "2023-12-06.001.webp",
+    "2024-02-28.001.webp",
+    "2024-03-05.001.webp",
+    "2024-03-09.001.webp",
+    "2024-03-14.001.webp",
+    "2024-03-15.001.webp",
+    "2024-03-26.001.webp",
     "2024-05-17.001.webp",
     "2024-05-18.001.webp",
     "2024-07-04.001.webp",
-    "2024-09-06.001.png",
-    "2026-04-14.001.png"
+    "2024-09-06.001.webp",
+    "2026-04-14.001.webp"
 ]
 
 const dateOf = (file: string): string => file.slice(0, 10)

@@ -5,7 +5,7 @@ import {Slide} from "@/Slide"
 
 const className = Html.adoptStyleSheet(css, "AICoding")
 
-const SHOT = "/images/bender.png"
+const SHOT = "/images/bender.webp"
 
 export const AICodingSlide = () => (
     <Slide eyebrow="AI Coding" headline="How I work with the machine.">
@@ -21,8 +21,8 @@ export const AICodingSlide = () => (
                     <li>Ask relentlessly questions (one by one), until you are good to go.</li>
                     <li>Make a dry run and present all arising issues (one by one).</li>
                     <li>Write tests as much as possible. Cover all cases.</li>
-                    <li><strong>Read the plan!</strong></li>
-                    <li><strong>Never blindly trust an AI!</strong></li>
+                    <li><strong>Read the plan.</strong></li>
+                    <li><strong>Never trust an AI.</strong></li>
                     <li>Implement meaningful steps that compile and can be reviewed.</li>
                 </ul>
             </div>
