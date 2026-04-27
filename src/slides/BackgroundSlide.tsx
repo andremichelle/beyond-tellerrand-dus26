@@ -12,7 +12,6 @@ export const BackgroundSlide = () => (
         <div class={className}>
             <figure class="figure">
                 <img class="photo" src={PHOTO} alt="André Michelle, 2009"/>
-                <figcaption>Photo: Ralph Hauwert</figcaption>
             </figure>
             <ul class="bullets">
                 <li>Techno DJ in the 90s.</li>
