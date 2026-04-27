@@ -16,6 +16,7 @@ import {PreAudiotoolEraSlide} from "@/slides/PreAudiotoolEraSlide"
 import {AudiotoolSlide} from "@/slides/AudiotoolSlide"
 import {AudiotoolEscalationSlide} from "@/slides/AudiotoolEscalationSlide"
 import {StepBackSlide} from "@/slides/StepBackSlide"
+import {NegativeEmotionsSlide} from "@/slides/NegativeEmotionsSlide"
 import {OpenDAWIdeasSlide} from "@/slides/OpenDAWIdeasSlide"
 import {OpenDAWAmbassadorsSlide} from "@/slides/OpenDAWAmbassadorsSlide"
 import {TrojanHorseSlide} from "@/slides/TrojanHorseSlide"
@@ -65,6 +66,7 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/audiotool", title: "Audiotool", factory: AudiotoolSlide},
     {path: "/audiotool-escalation", title: "Audiotool Escalation", factory: AudiotoolEscalationSlide},
     {path: "/step-back", title: "Step Back", factory: StepBackSlide},
+    {path: "/negative-emotions", title: "Negative Emotions", factory: NegativeEmotionsSlide},
     {path: "/opendaw-ideas", title: "openDAW Ideas", factory: OpenDAWIdeasSlide},
     {path: "/opendaw-ambassadors", title: "openDAW Ambassadors", factory: OpenDAWAmbassadorsSlide},
     {path: "/trojan-horse", title: "Trojan Horse", factory: TrojanHorseSlide},

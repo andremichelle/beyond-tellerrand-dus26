@@ -15,6 +15,9 @@ export const StepBackSlide = () => (
                 <li>A huge step back.</li>
                 <li>Revisiting all decisions I made.</li>
                 <li>Using the time to remember why I actually started Audiotool in the first place.</li>
+                <li>I realized I gained something just as valuable:<br/>
+                    <strong>knowledge and experience</strong>.
+                </li>
             </ul>
         </div>
     </Slide>
