@@ -41,8 +41,8 @@ export const LibJsxSlide = () => (
             </div>
             <ul class="bullets">
                 <li><strong>LIB-JSX</strong> is developed for performance.</li>
-                <li>Utilizes <strong>JavaScript XML</strong></li>
-                <li>Full control over html updates.</li>
+                <li>Utilizes <strong>JavaScript XML</strong>.</li>
+                <li>Full control over HTML updates.</li>
                 <li>Mix HTML and TypeScript.</li>
                 <li>Create reusable components.</li>
                 <li>No virtual DOM.</li>

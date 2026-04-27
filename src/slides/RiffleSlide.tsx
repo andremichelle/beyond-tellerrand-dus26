@@ -13,7 +13,8 @@ export const RiffleSlide = () => (
             <img class="shot" src={SHOT} alt="Riffle"/>
             <ul class="bullets">
                 <li><strong>Riffle.studio</strong></li>
-                <li>Goto market in less than 9 months</li>
+                <li>Completely fresh approach for musicians and beginners alike.</li>
+                <li>Go to market in less than 9 months.</li>
             </ul>
         </div>
     </Slide>

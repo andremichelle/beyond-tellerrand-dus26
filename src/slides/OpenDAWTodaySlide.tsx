@@ -14,7 +14,7 @@ export const OpenDAWTodaySlide = () => (
             <ul class="bullets">
                 <li>openDAW is now online.</li>
                 <li>Funded by two commercial <strong>openDAW SDK</strong> consumers.</li>
-                <li>Constantly taking to musicians and music-teachers.</li>
+                <li>Constantly talking to musicians and music-teachers.</li>
                 <li>Will be the tool for the next semesters at Hochschule für Musik und Tanz Köln <strong>(Cologne University of Music and Dance)</strong>.</li>
                 <li>Official 1.0 release on September 1st, 2026.</li>
             </ul>

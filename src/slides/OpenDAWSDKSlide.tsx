@@ -44,7 +44,7 @@ export const OpenDAWSDKSlide = () => (
                     <li>Tree-shakable.</li>
                     <li>Lots of useful code and data structures.</li>
                     <li>Audio engine with stock devices.</li>
-                    <li>Clipboard, Preset, Project Api</li>
+                    <li>Clipboard, Preset, Project API.</li>
                 </ul>
             </div>
         </div>
