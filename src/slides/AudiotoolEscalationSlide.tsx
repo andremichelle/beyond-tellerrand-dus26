@@ -8,14 +8,13 @@ const className = Html.adoptStyleSheet(css, "AudiotoolEscalation")
 const SCREENSHOT = "/images/github.webp"
 
 export const AudiotoolEscalationSlide = () => (
-    <Slide eyebrow="Audiotool Escalation" headline="It fell apart.">
+    <Slide eyebrow="Audiotool" headline="Escalation.">
         <div class={className}>
             <img class="shot" src={SCREENSHOT} alt="Audiotool escalation"/>
             <ul class="bullets">
-                <li>Expressed displeasure about constantly moving goals.</li>
-                <li>Contract got terminated.</li>
-                <li>Everything fell apart for a few months.</li>
-                <li>Still in court after more than 2 years.</li>
+                <li>Expressed displeasure about constantly moving goals and mismanagement.</li>
+                <li>Contract got <strong>immediately</strong> terminated.</li>
+                <li>Still in court fighting for my promised shares after more than 2 years.</li>
             </ul>
         </div>
     </Slide>

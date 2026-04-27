@@ -29,7 +29,10 @@ const FEATURES: ReadonlyArray<string> = [
     "Shortcut Manager",
     "DAWproject In / Out",
     "Piano Tutorial Mode",
-    "Video Export"
+    "Video Export",
+    "Tempo Automation",
+    "Signature Automation",
+    "Marker Track"
 ]
 
 export const OpenDAWFeaturesSlide = () => (

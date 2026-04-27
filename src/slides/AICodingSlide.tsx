@@ -8,7 +8,7 @@ const className = Html.adoptStyleSheet(css, "AICoding")
 const SHOT = "/images/bender.webp"
 
 export const AICodingSlide = () => (
-    <Slide eyebrow="AI Coding" headline="How I work with the machine.">
+    <Slide eyebrow="AI Coding" headline="Not to chabby at all.">
         <div class={className}>
             <img class="shot" src={SHOT} alt="Bender"/>
             <div class="text">

@@ -18,6 +18,9 @@ import {AudiotoolEscalationSlide} from "@/slides/AudiotoolEscalationSlide"
 import {StepBackSlide} from "@/slides/StepBackSlide"
 import {OpenDAWIdeasSlide} from "@/slides/OpenDAWIdeasSlide"
 import {OpenDAWAmbassadorsSlide} from "@/slides/OpenDAWAmbassadorsSlide"
+import {TrojanHorseSlide} from "@/slides/TrojanHorseSlide"
+import {XReactionsSlide} from "@/slides/XReactionsSlide"
+import {DoItAnywaySlide} from "@/slides/DoItAnywaySlide"
 import {OpenDAWSnapshotsSlide} from "@/slides/OpenDAWSnapshotsSlide"
 import {OpenDAWTodaySlide} from "@/slides/OpenDAWTodaySlide"
 import {OpenDAWStatsSlide} from "@/slides/OpenDAWStatsSlide"
@@ -33,7 +36,6 @@ import {Orange3Slide} from "@/slides/Orange3Slide"
 import {OpenUpSlide} from "@/slides/OpenUpSlide"
 import {TechnoSetupSlide} from "@/slides/TechnoSetupSlide"
 import {AICodingSlide} from "@/slides/AICodingSlide"
-import {GrowthSlide} from "@/slides/GrowthSlide"
 import {DemoTimeSlide} from "@/slides/DemoTimeSlide"
 import {QRCodeSlide} from "@/slides/QRCodeSlide"
 
@@ -65,6 +67,9 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/step-back", title: "Step Back", factory: StepBackSlide},
     {path: "/opendaw-ideas", title: "openDAW Ideas", factory: OpenDAWIdeasSlide},
     {path: "/opendaw-ambassadors", title: "openDAW Ambassadors", factory: OpenDAWAmbassadorsSlide},
+    {path: "/trojan-horse", title: "Trojan Horse", factory: TrojanHorseSlide},
+    {path: "/x-reactions", title: "X Reactions", factory: XReactionsSlide},
+    {path: "/do-it-anyway", title: "Do It Anyway", factory: DoItAnywaySlide},
     {path: "/opendaw-snapshots", title: "openDAW Snapshots", factory: OpenDAWSnapshotsSlide},
     {path: "/opendaw-today", title: "openDAW Today", factory: OpenDAWTodaySlide},
     {path: "/opendaw-stats", title: "openDAW Stats", factory: OpenDAWStatsSlide},
@@ -80,7 +85,6 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/riffle", title: "Riffle", factory: RiffleSlide},
     {path: "/techno-setup", title: "Techno Setup", factory: TechnoSetupSlide},
     {path: "/ai-coding", title: "AI Coding", factory: AICodingSlide},
-    {path: "/growth", title: "Growth", factory: GrowthSlide},
     {path: "/demo-time", title: "Demo Time", factory: DemoTimeSlide},
     {path: "/qr", title: "QR", factory: QRCodeSlide}
 ]

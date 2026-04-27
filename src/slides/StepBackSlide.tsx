@@ -8,7 +8,7 @@ const className = Html.adoptStyleSheet(css, "StepBack")
 const SHOT = "/images/me-futurama-flat.webp"
 
 export const StepBackSlide = () => (
-    <Slide eyebrow="Step Back" headline="Taking a step back.">
+    <Slide eyebrow="Dark times" headline="Taking a step back.">
         <div class={className}>
             <img class="shot" src={SHOT} alt="Taking a step back"/>
             <ul class="bullets">
