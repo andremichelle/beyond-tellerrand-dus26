@@ -9,6 +9,7 @@ export const NegativeEmotionsSlide = () => (
     <Slide eyebrow="Negative emotions" headline="Put them to work.">
         <div class={className}>
             <ul class="bullets">
+                <li>Embarrassed by my own poor judgement.</li>
                 <li>Channel anger into focused work.</li>
                 <li>Turn spite into determination.</li>
                 <li>Reclaim what you always believed in.</li>
