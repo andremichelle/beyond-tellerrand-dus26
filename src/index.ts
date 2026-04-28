@@ -4,7 +4,6 @@ import {AboutMeSlide} from "@/slides/AboutMeSlide"
 import {BackgroundSlide} from "@/slides/BackgroundSlide"
 import {GloryFlashDaysSlide} from "@/slides/GloryFlashDaysSlide"
 import {DeloungeSlide} from "@/slides/DeloungeSlide"
-import {SyncboxSlide} from "@/slides/SyncboxSlide"
 import {KalimbaSlide} from "@/slides/KalimbaSlide"
 import {BasementMXSlide} from "@/slides/BasementMXSlide"
 import {DigitalAudioSlide} from "@/slides/DigitalAudioSlide"
@@ -24,7 +23,6 @@ import {XReactionsSlide} from "@/slides/XReactionsSlide"
 import {DoItAnywaySlide} from "@/slides/DoItAnywaySlide"
 import {OpenDAWSnapshotsSlide} from "@/slides/OpenDAWSnapshotsSlide"
 import {OpenDAWTodaySlide} from "@/slides/OpenDAWTodaySlide"
-import {OpenDAWStatsSlide} from "@/slides/OpenDAWStatsSlide"
 import {ExternalGearSlide} from "@/slides/ExternalGearSlide"
 import {OpenDAWFeaturesSlide} from "@/slides/OpenDAWFeaturesSlide"
 import {ScriptEditorSlide} from "@/slides/ScriptEditorSlide"
@@ -54,7 +52,6 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/background", title: "Background", factory: BackgroundSlide},
     {path: "/glory-flash-days", title: "Glory Flash Days", factory: GloryFlashDaysSlide},
     {path: "/delounge", title: "delounge", factory: DeloungeSlide},
-    {path: "/syncbox", title: "syncbox", factory: SyncboxSlide},
     {path: "/basementmx", title: "basementmx", factory: BasementMXSlide},
     {path: "/kalimba", title: "kalimba", factory: KalimbaSlide},
     {path: "/digital-audio", title: "Digital Audio", factory: DigitalAudioSlide},
@@ -74,7 +71,6 @@ export const SLIDES: ReadonlyArray<SlideEntry> = [
     {path: "/do-it-anyway", title: "Do It Anyway", factory: DoItAnywaySlide},
     {path: "/opendaw-snapshots", title: "openDAW Snapshots", factory: OpenDAWSnapshotsSlide},
     {path: "/opendaw-today", title: "openDAW Today", factory: OpenDAWTodaySlide},
-    {path: "/opendaw-stats", title: "openDAW Stats", factory: OpenDAWStatsSlide},
     {path: "/opendaw-features", title: "openDAW Features", factory: OpenDAWFeaturesSlide},
     {path: "/open-up", title: "Ilir Bajri Open Up", factory: OpenUpSlide},
     {path: "/script-editor", title: "Script Editor", factory: ScriptEditorSlide},

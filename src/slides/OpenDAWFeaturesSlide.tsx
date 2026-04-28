@@ -32,7 +32,8 @@ const FEATURES: ReadonlyArray<string> = [
     "Video Export",
     "Tempo Automation",
     "Signature Automation",
-    "Marker Track"
+    "Marker Track",
+    "Preset Management"
 ]
 
 export const OpenDAWFeaturesSlide = () => (

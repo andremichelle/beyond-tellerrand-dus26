@@ -52,9 +52,7 @@ export const DigitalAudioSlide = () => (
         <div className={className}>
             <ul className="bullets">
                 <li>Sound is pressure moving through air. A wave.</li>
-                <li>A computer cannot store a wave. It stores a list of numbers.</li>
-                <li>Each number is the height of the wave at one moment in time.</li>
-                <li>The count of numbers per second is called the sample rate. A CD stores 44100 of them every second.</li>
+                <li>A computer stores a list of numbers.</li>
             </ul>
             <svg class="diagram" viewBox={`0 0 ${WIDTH} ${HEIGHT}`} preserveAspectRatio="xMidYMid meet">
                 <text x={String(MARGIN_X)} y="40" class="axis-label">amplitude</text>

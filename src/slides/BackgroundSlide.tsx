@@ -15,8 +15,7 @@ export const BackgroundSlide = () => (
             </figure>
             <ul class="bullets">
                 <li>Techno DJ in the 90s.</li>
-                <li>Failed musician.</li>
-                <li>Couldn't hold a job.</li>
+                <li>I was always broke and promised myself: if I ever made it, I’d build music studios for people like me.</li>
                 <li>No training in coding or design.</li>
                 <li>Started with Flash 4.</li>
                 <li>Got really good at it?</li>

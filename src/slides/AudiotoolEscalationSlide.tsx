@@ -14,8 +14,8 @@ export const AudiotoolEscalationSlide = () => (
             <ul class="bullets">
                 <li>Expressed displeasure about constantly moving goals and mismanagement.</li>
                 <li>Contract got <strong>immediately</strong> terminated.</li>
-                <li>Still in court fighting for my promised shares after more than 2 years.</li>
                 <li>It felt like losing not just 16 years of work, but a project that shaped a third of my life.</li>
+                <li>Still in court fighting for my promised shares after more than 2 years.</li>
             </ul>
         </div>
     </Slide>

@@ -9,7 +9,7 @@ const className = Html.adoptStyleSheet(css, "Delounge")
 const BASE = "/misc/"
 
 export const DeloungeSlide = () => (
-    <Slide eyebrow="Flash 5 · early 2000" headline="delounge.">
+    <Slide eyebrow="Flash 4" headline="delounge.">
         <div class={className}>
             <div class="stage">
                 <FlashMovie

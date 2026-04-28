@@ -11,7 +11,6 @@ export const NegativeEmotionsSlide = () => (
             <ul class="bullets">
                 <li>Channel anger into focused work.</li>
                 <li>Turn spite into determination.</li>
-                <li>Let energy bridge the gap between knowing and feeling.</li>
                 <li>Reclaim what you always believed in.</li>
             </ul>
         </div>
